@@ -41,12 +41,44 @@ int main()
     int n = 10;
     int sum = 0;
 
-    for(int i = 1; i<=n; i++) {
-        sum += i;
-        if(i == 5) break;
+    // for(int i = 1; i<=n; i++) {
+    //     if(i%2 != 0){
+    //         sum += i;
+    //     }
+    //     // if(i == 5) break;
+    // }
+    // int i = 1;
+    bool isPrime = true;
+    // while(i <= n){
+    //     if(i%2 != 0){
+    //         sum += i;
+    //     }
+    //     i++;
+    // }
+    // do{
+    //     if(i%2 != 0){
+    //         sum+= i;
+    //     }
+    //     i++;
+    // }while(i <= n);
+    for(int i = 2; i <=n-1; i++){
+        if(n%i == 0){
+            // cout << "It is not a Prime Number" << endl;
+            isPrime = false;
+            break;
+        }
+            // cout << "It is a Prime Number" << endl;
+            // isPrime = true;
+            //Since isPrime is defined first no need to write again correct?
     }
-    cout << sum << endl;
+
+    cout << isPrime << endl;
 
     cout << "Finish" << endl;
     return 0;
 }
+
+
+//Major difference:
+//do()while() loop does the work and check the condition then.
+//while() loop checks the condition first and does the work.
