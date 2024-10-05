@@ -38,7 +38,7 @@ int main()
     //     count++; //update
     // }
 
-    int n = 10;
+    // int n = 10;
     int sum = 0;
 
     // for(int i = 1; i<=n; i++) {
@@ -61,19 +61,46 @@ int main()
     //     }
     //     i++;
     // }while(i <= n);
-    for(int i = 2; i <=n-1; i++){
-        if(n%i == 0){
-            // cout << "It is not a Prime Number" << endl;
-            isPrime = false;
-            break;
+    // for(int i = 2; i <=n-1; i++){
+    //     if(n%i == 0){
+    //         // cout << "It is not a Prime Number" << endl;
+    //         isPrime = false;
+    //         break;
+    //     }
+    //         // cout << "It is a Prime Number" << endl;
+    //         // isPrime = true;
+    //         //Since isPrime is defined first no need to write again correct?
+    // }
+    // cout << isPrime << endl;
+
+    //Start pattern loop
+    int l = 5;
+    for(int i = 1; i<=l; i++){ //Line of stars
+        int x = 10;
+        for (int j = 1; j<= x; j++){ //In one line how many stars
+            cout << "* ";
         }
-            // cout << "It is a Prime Number" << endl;
-            // isPrime = true;
-            //Since isPrime is defined first no need to write again correct?
+    cout << endl;
+    }  
+
+    //HomeWork:
+    //Sum of all numbers from 1 to N which is divisible by 3
+    // int n = 20;
+    // int sumNum = 0;
+    // for(int i=1; i<=n; i++){
+    //     if(i % 3 == 0){
+    //         sumNum += i;
+    //     }
+    // }
+    // cout << sumNum << endl;
+
+    //Factorial of n
+    int n = 4;
+    int factorial = 1;
+    for(int i=2; i<=n; i++){
+        factorial *= i ;
     }
-
-    cout << isPrime << endl;
-
+    cout << factorial << endl;
     cout << "Finish" << endl;
     return 0;
 }
