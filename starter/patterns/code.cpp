@@ -99,12 +99,67 @@ int main(){
     //     }
     //     cout << endl;
     // }
-    int n = 4;
-    for(int i=0; i<n; i++){
-        for(int j=i+1; j>0; j--){   //---->Actual logic using backward loop: //Reverse logic first was 0 to i+1 , now is i+1 to 0
-            cout << j;
-        }
-        cout << endl;
-    }
+    // int n = 4;
+    // for(int i=0; i<n; i++){
+    //     for(int j=i+1; j>0; j--){   //---->Actual logic using backward loop: //Reverse logic first was 0 to i+1 , now is i+1 to 0
+    //         cout << j;
+    //     }
+    //     cout << endl;
+    // }
+    
+    // //Character triangle reverse
+    // int n = 4;
+    // for(int i=0; i<n; i++){
+    //     char ch = 'A'+i;   //New logic for reverse characters
+    //     for(int j=i+1; j>0; j--){     //---->Actual logic using backward loop: //Reverse logic first was 0 to i+1 , now is i+1 to 0
+    //         cout << ch << " ";
+    //         ch --;
+    //     }
+    //     cout << endl;
+    // }
+
+
+    // //Floyd's Triangle Pattern
+    // int n = 4;
+    // int num = 1;
+    // for(int i=0; i<n; i++){
+    //     for(int j=0; j<i+1; j++){ //Even in backwards will result the same [int j=i+1; j>0; j--]
+    //         cout << num << " ";
+    //         num ++;
+    //     }
+    //     cout << endl;
+    // }
+
+    // //=> Inverted Triangle number Pattern
+    // int n=4;
+    // for(int i=0; i<n; i++){ //Lines 
+    //     for(int j=0; j<i; j++){
+    //         cout << " ";           //Logic to print space first , and space is according to i
+    //     }
+    //     for(int k=0; k<n-i; k++){
+    //         cout << i+1;           //Logic to print star according to i-n
+    //     }
+    //     cout << endl;
+    // }
+
+    // //Pyramid Pattern number pattern
+    // //    1|          
+    // //   12|1
+    // //  123|21        ==> Logic here is to separate the pyramid into 2 separate triangle where first spaces then number again some number
+    // // 1234|321
+    // int n=7;
+    // for(int i=0; i<n; i++){ //Lines 
+    //     for(int j=0; j<n-i-1; j++){ //spaces where n-i = 4 but want 3 so n-i-1
+    //         cout << " ";
+    //     }
+    //     for(int k=1; k<=i+1; k++){ //1st set of numbers
+    //         cout << k;            //print k because increasing and start by one as seen in diagram
+    //     }
+    //     for(int l=i; l>0; l--){ //here will run i times but have to reverse the numbers
+    //         cout << l;
+    //     }
+    //     cout << endl;
+    // }
+
     return 0;
 }
