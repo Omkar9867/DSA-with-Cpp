@@ -161,5 +161,55 @@ int main(){
     //     cout << endl;
     // }
 
+    //Hollow diamond pattern
+//        *
+//      *   *
+//     *     *
+//    *       *
+//   ------------  //Logic here is to split the diamond into 2 separate parts but in horizontal direction
+//     *     *
+//      *   *
+//        *  
+    int n=4;
+    for(int i=0; i<n; i++){//lins of first part
+        for(int j=0; j<n-i-1; j++){//spaces first part first space
+            cout << " ";
+        }
+        cout << "*";  //first star after space
+        if(i != 0){
+            for(int k=0; k<2*i-1; k++){  //second spaces  ==> Logic here is that spaces in middle is odd order so running loop evenly
+                cout << " ";
+            } 
+        cout << "*";  //second star after space
+        }
+        cout << endl;
+    }
+    //Now the second part
+    for(int i=0; i<n-1; i++){ //Lines logic for second part
+        for(int j=0; j<i+1; j++){ //spaces second part first space
+            cout << " ";    
+        }
+        cout << "*";//first star after space
+        if(i != n-2){ //Since 3 lines
+            // for(int k=0; k<2*(n-2-i)-1; k++){ //second spaces second star ==> logic here is second spaces i.e. in middle is in odd number but in reverse: Since i is when increasing spaces are decreasing, so negative(i) 
+            for(int k=0; k<2*(n-i)-5; k++){  // 2*(n-2-i) ==> 2n-4-2i-1 ==> 2(n-i)-5
+                cout << " ";
+            }
+            cout << "*";
+        }
+        cout << endl;
+    }
+
     return 0;
 }
+
+
+// For diamond sum
+// i=0 , n=4
+
+// odd number is 2* __ -1
+
+// 2* what will give me 3 when i = 0// so i=0 then spaces 3, so can we say 2*2-1 will give me 3
+//                                        i=1 then spaces 2, so            2*2-1 -1 will give me 2
+
+// 2*(n-2-i)-1 because n-i is reverse
