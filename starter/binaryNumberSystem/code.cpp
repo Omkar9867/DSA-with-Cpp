@@ -29,7 +29,7 @@ int binaryToDecimal(int n){
 
 int main(){
     // int binaryNum = decimalToBinary(50);
-    int decimalNum = binaryToDecimal(101010);
+    int decimalNum = binaryToDecimal(1010);
 
     // cout << "Binary Number : " << binaryNum << endl;
     cout << "Decimal Number : " << decimalNum << endl;
