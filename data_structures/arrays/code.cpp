@@ -21,7 +21,7 @@ using namespace std;
 // }
 
 // Print Unique values
-int uniqueVal(int arr[], int val[], int size, int &uniquecount){
+int uniqueVal(int arr[], int val[], int size, int &uniquecount){ //& it is a reference to the value which will not make duplicate variable. 
     uniquecount = 0;  //Initialize with first index for val array so the unique value will place in 1st place.
     for(int i=0; i<size; i++){
       bool isUnique = true; //Assuming first element is unique
