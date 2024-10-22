@@ -2,19 +2,51 @@
 #include <vector>
 using namespace std;
 
+// //Linear Search using vector
+// int linearSearch(vector<int>arr, int target){
+//     for(int i=0; i<arr.size(); i++){
+//         if(arr[i] == target){
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
+
+//Reverse code
+vector<int>reverseArr(vector<int>&arr){
+    int start = 0, end = arr.size()-1;
+    while(start < end){
+        swap(arr[start], arr[end]);
+        start++;
+        end--;
+    }
+    return arr;
+}
+
 int main(){
     vector<int> vec;  //0
     vec.push_back(20);
     vec.push_back(22);
     vec.pop_back();
-    // vector<int> vec = {1, 2, 3};
+    vector<int> arr = {1, 2, 3};
+    int target = 3;
     // vector<int> vec (3, 0);
     // vector<char> vec = {'a', 'b', 'c', 'd'};
 
-    // for(int val: vec){ //This is a forEach loop, where i is not a index , but it is the stored as value of that index. And the iderator type will be the same as the array
+    // for(int val: arr){ //This is a forEach loop, where i is not a index , but it is the stored as value of that index. And the iderator type will be the same as the array
     //     cout << val << endl;
     // }
-    cout << vec.size() << endl;
+    // cout << vec.size() << endl;
+    // cout << "Targetted value in in index: " << linearSearch(arr, target) << endl;
+    arr = reverseArr(arr);
+    for (int num: arr){
+        cout << num;
+    }
+    cout << endl;
+     for(int val: arr){ //This is a forEach loop, where i is not a index , but it is the stored as value of that index. And the iderator type will be the same as the array
+        cout << val;
+    }
+    cout << endl;
     return 0;
 }
 
