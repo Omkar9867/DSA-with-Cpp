@@ -20,25 +20,40 @@ using namespace std;
 
 // --------------------------------------------TC - O(logn) ------------------------------------
 
-int binary_search(vector<int>sortedArr, int target){
-    int st = 0, ed = sortedArr.size() -1;
-    while(st <= ed) {
-        int mid = st + (ed - st) /2;
-        if(sortedArr[mid] > target){
-            ed = mid - 1; //1st Half
-        }else if(sortedArr[mid] < target){
-            st = mid+1; //2nd Half
+// int binary_search(vector<int>sortedArr, int target){
+//     int st = 0, ed = sortedArr.size() -1;
+//     while(st <= ed) {
+//         int mid = st + (ed - st) /2;
+//         if(sortedArr[mid] > target){
+//             ed = mid - 1; //1st Half
+//         }else if(sortedArr[mid] < target){
+//             st = mid+1; //2nd Half
+//         }else{
+//             return mid;
+//         }
+//     }
+//     return  -1;
+// }
+
+// ------------------------------------Recurssion-Approach-----TC  - O(1) -----------------------------
+int recBinarySearch(vector<int> arr, int tar, int st, int ed){
+    if(st<=ed){
+        int mid = st + (ed-st) /2;
+        if(arr[mid] > tar){ //1st Half
+            return recBinarySearch(arr, tar, st, mid-1);
+        }else if (arr[mid] < tar){ //2nd Half
+            return recBinarySearch(arr, tar, mid+1, ed);
         }else{
             return mid;
         }
     }
-    return  -1;
+    return -1;
 }
 
 int main(){
     vector<int> arr = {-1, 0, 3, 4, 5, 9, 12};
-    int target = 5;
-    int value = binary_search(arr, target);
+    int target = 3;
+    int value = recBinarySearch(arr, target, 0, arr.size()-1);
 
     cout << "Index value of Target : " << value << endl;
     return 0;
