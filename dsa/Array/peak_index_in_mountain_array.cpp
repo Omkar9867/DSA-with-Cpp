@@ -5,7 +5,8 @@ using namespace std;
 //==> Since the task is to solve in O(logn) then bruteforce approach is no use now.
 
  int peakIndexInMountainArray(vector<int>& arr) {
-        int st = 0, ed = arr.size()-1;
+        // int st = 0, ed = arr.size()-1; //Since the value cannot be start or end of the index so our starting point will be the next of the first index and same for end
+        int st = 1, ed = arr.size()-2;
         while(st <= ed){
             int mid = st+(ed-st) / 2;
             if(arr[mid] > arr[mid -1] && arr[mid] > arr[mid +1]){
@@ -22,7 +23,7 @@ using namespace std;
     }
 
 int main(){
-    vector<int>mountainArr = {0,10,5,2,1};
+    vector<int>mountainArr = {0,10,5,2};
     int value = peakIndexInMountainArray(mountainArr);
     // cout << "Peak Mountain value is: " << value << endl;
     cout << "Peak Mountain index is: " << value << endl;
