@@ -4,6 +4,7 @@ using namespace std;
 
 //==> Since the task is to solve in O(logn) then bruteforce approach is no use now.
 
+// ---------------------------------------------O(logn)----------------------------------
  int peakIndexInMountainArray(vector<int>& arr) {
         // int st = 0, ed = arr.size()-1; //Since the value cannot be start or end of the index so our starting point will be the next of the first index and same for end
         int st = 1, ed = arr.size()-2;
