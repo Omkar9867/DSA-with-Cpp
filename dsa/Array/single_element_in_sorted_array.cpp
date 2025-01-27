@@ -2,6 +2,37 @@
 #include <vector>
 using namespace std;
 
+// int singleNonDuplicate(vector<int>& nums) {
+//     int st = 0, ed = nums.size() - 1;
+//     while(st <= ed){
+//         int mid = st + (ed - st) / 2;
+//         if(nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]){
+//             return nums[mid];
+//         }
+//         else{
+//             if(nums[mid] == nums[mid -1]){
+//                 //We add or subract 1 element with mid is to see the count excluding the same number of the mid
+//                 if((mid - 1) % 2 == 0){ 
+//                     st = mid + 1;
+//                 }else{
+//                     ed = mid - 1;
+//                 }
+//             }else{
+//                 if((mid + 1) % 2 == 0){  //(ed-(mid+1) % 2)
+//                     ed = mid - 1;
+//                 }else{
+//                     st = mid + 1;
+//                 }
+//             }
+//         }
+//     }
+//     return -1;
+// }
+
+//Updated approach with SC O(1)
+
+//Check whether the L&R sides are odd or even length by mid % 2 depends on mid if even or odd.
+//Also will handle if the mid is in the start i.e. 0 or end i.e. end-1
 int singleNonDuplicate(vector<int>& nums) {
     int st = 0, ed = nums.size() - 1;
     while(st <= ed){
@@ -9,24 +40,20 @@ int singleNonDuplicate(vector<int>& nums) {
         if(nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]){
             return nums[mid];
         }
-        else{
-            if(nums[mid] == nums[mid -1]){
-                //We add or subract 1 element with mid is to see the count excluding the same number of the mid
-                if((mid - 1) % 2 == 0){ 
-                    st = mid + 1;
-                }else{
+        else if(nums[mid] % 2 == 0){ // Even case
+                if(nums[mid -1] == nums[mid]){ // if match with L side then it will become odd length so to search in left side else right side
                     ed = mid - 1;
+                }else{
+                    st = mid + 1;
                 }
-            }else{
-                if((mid + 1) % 2 == 0){  //(ed-(mid+1) % 2)
-                    ed = mid - 1;
-                }else{
+        }else{ // Odd case
+                if(nums[mid -1] == nums[mid]){ // if match with L side then it will become even length so to search in right side else left side
                     st = mid + 1;
+                }else{
+                    ed = mid - 1;
                 }
             }
         }
-    }
-    return -1;
 }
 
 int main(){
