@@ -36,3 +36,14 @@ int main(){
 // Input: n = 123
 // Output: 321
 // Explanation: Reverse of 123 is 321.
+
+//Condition Examples:
+// Example 1:
+// Suppose revInt = 214748364, and the next lastDig is 8.
+// revInt * 10 + 8 = 2147483640 + 8 = 2147483648, which is greater than INT_MAX (2147483647), causing an overflow.
+// The condition revInt == INT_MAX / 10 && lastDig > 7 will trigger this check and return 0 to avoid the overflow.
+
+// Example 2:
+// Suppose revInt = -214748364, and the next lastDig is -9.
+// revInt * 10 + (-9) = -2147483640 - 9 = -2147483649, which is less than INT_MIN (-2147483648), causing an underflow.
+// The condition revInt == INT_MIN / 10 && lastDig < -8 will trigger this check and return 0 to avoid the underflow.
