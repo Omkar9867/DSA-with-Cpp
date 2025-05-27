@@ -2,19 +2,6 @@
 #include <climits>
 using namespace std;
 
-// ----------------------Approach O(logv10N) -------------------------
-
-// int reverseNumber(int n){
-//     int result = 0;
-//     while(n > 0){
-//         // int lastDig = n%10;
-//         result = (result*10) + n%10;
-//         n = n/10;
-//     }
-//     return result;
-// }
-
-// ------------------------Revised solution for leetcode---------
 int reverse(int x) {
         int revInt = 0;
         while(x != 0){ //!Note here (x!=0) and not (x > 0)
@@ -37,7 +24,7 @@ int main(){
     return 0;
 }
 
-// Reverse a number
+// 7. Reverse Integer
 // Hint
 // You are given an integer n. Return the integer formed by placing the digits of n in reverse order.
 
