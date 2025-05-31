@@ -13,23 +13,38 @@ using namespace std;
 //     return gdc;
 // }
 
-// ---------------------------------Better Approach ---------------
+// ---------------------------------Better Approach O(N)---------------
 // Count reverse so you could get the bigger number beforehand
-int GDP(int n1,int n2){
-    for(int i = min(n1, n2); i>0; i--){
-        if(n1%i == 0 && n2%i == 0){
-            return i;
-        }
-    }
-    return 1;
-}
+// int GDP(int n1,int n2){
+//     for(int i = min(n1, n2); i>0; i--){
+//         if(n1%i == 0 && n2%i == 0){
+//             return i;
+//         }
+//     }
+//     return 1;
+// }
 
 // ---The Euclidean Algorithm
-// --------------------------------Optimal Approach--------------
+// --------------------------------Optimal Approach O(logn)--------------
+int GDP(int n1,int n2){
+    while(n1 > 0 && n2 > 0){
+        if(n1 > n2){
+            n1 = (n1%n2);// Can be also written as n1 = (n1-n2); but logically a%b 
+        }else{
+            n2 = (n2%n1);
+        }
+    }
+    if(n1 == 0){
+        return n2;
+    }else{
+        return n1;
+    }
+}
+
 
 
 int main(){
-    int result = GDP(4, 8);
+    int result = GDP(20, 15);
     cout << "Result: " << result << endl;
     return 0;
 }
@@ -58,12 +73,13 @@ int main(){
 // It operates on the principle that the GCD of two numbers remains the same even if the smaller number is subtracted from the larger number.
 
 // To find the GCD of n1 and n2 where n1 > n2:
+//!Formula : gdc(a, b) = gcd((a-b), b) where a > b
 
 // Repeatedly subtract the smaller number from the larger number until one of them becomes 0.
 // Once one of them becomes 0, the other number is the GCD of the original numbers.
 // Eg, n1 = 20, n2 = 15:
 
-// gcd(20, 15) = gcd(20-15, 15) = gcd(5, 15)
+// gcd(20, 15) = gcd(20-15, 15) = gcd(5, 15)  // Also similar as a%b i.e. subracting 'a' (b times) So formula: gdc(a%b, b)
 
 // gcd(5, 15) = gcd(15-5, 5) = gcd(10, 5)
 
