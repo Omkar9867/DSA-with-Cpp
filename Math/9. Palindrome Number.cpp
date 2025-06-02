@@ -23,7 +23,7 @@ int main(){
     return 0;
 }
 
-// Palindrome Number
+// 9. Palindrome Number
 // Hint
 // You are given an integer n. You need to check whether the number is a palindrome number or not. Return true if it's a palindrome number, otherwise return false.
 

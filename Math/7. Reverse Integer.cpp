@@ -37,7 +37,7 @@ int main(){
     return 0;
 }
 
-// Reverse a number
+// 7. Reverse a number
 // Hint
 // You are given an integer n. Return the integer formed by placing the digits of n in reverse order.
 
