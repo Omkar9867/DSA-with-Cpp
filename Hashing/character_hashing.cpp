@@ -1,22 +1,48 @@
 #include <iostream>
+#include <map>
 using namespace std;
 
 int main(){
-    string s;
-    cin >> s;
 
+    // string s;
+    // cin >> s;
     // Pre compute
-    int hash[26] = {0};
-    for(int i=0; i<s.size(); i++){
-        hash[s[i] - 'a'] += 1;
+    // int hash[26] = {0};
+    // for(int i=0; i<s.size(); i++){
+    //     hash[s[i] - 'a'] += 1;
+    // }
+    // int q;
+    // cin >> q;
+    // while(q--){
+    //     char c;
+    //     cin >> c;
+    //     // fetch
+    //     cout << hash[c-'a'] << endl;
+    // }
+
+    // Map int
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i=0; i<n; i++){
+        cin >> arr[i];
+    }
+    //Pre compute
+    map<int, int> mpp;
+    for(int i=0; i<n; i++){
+        mpp[arr[i]]++;
+    }
+    // Iterate in the map to see the sort
+    for(auto it: mpp){
+        cout << it.first << "-->" << it.second << endl;
     }
     int q;
     cin >> q;
     while(q--){
-        char c;
-        cin >> c;
+        int num;
+        cin >> num;
         // fetch
-        cout << hash[c-'a'] << endl;
+        cout << mpp[num] << endl;
     }
 
     return 0;
@@ -35,3 +61,14 @@ int main(){
 // We cannot hash an array up to 10^7 , so to solve the problem
 //*STL : 
 // map && un-ordered map
+// It is best option because the normal arr hash will take the max number value length and create that size array to store
+// But map only stores value that is needed
+//Map: stores all the values in sorted order
+//Storing or fetching from map takes OlogN TC in all case scenario
+
+// Unorderd map
+// As the name commends it doesnot store in order
+// Advantage: avg and best case scenario --> O(1)
+//          : worst case scenario --> O(N)
+
+//WorstCase reason: Internal Collision
