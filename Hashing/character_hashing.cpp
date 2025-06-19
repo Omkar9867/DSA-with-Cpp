@@ -72,3 +72,6 @@ int main(){
 //          : worst case scenario --> O(N)
 
 //WorstCase reason: Internal Collision
+// concept of collision example is when max numbers hash in a only particular index.
+// [1, 2,    3,     4]
+// [-, -, all data, -]
