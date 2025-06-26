@@ -6,7 +6,7 @@ using namespace std;
 
 void recursiveBubbleSort(vector<int> &arr, int n){
     if (n == 1) return;
-    int didSwap = 0;
+    int didSwap = 0;  // reason for did-swap is the arr is already  sorted so no need to further recurse
     for(int j = 0; j < n-1; j++){
         if(arr[j] > arr[j+1]){
             int temp = arr[j];
