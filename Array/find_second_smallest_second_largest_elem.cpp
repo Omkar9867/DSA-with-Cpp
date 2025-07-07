@@ -33,12 +33,27 @@ int secondLargestElement(int arr[], int n){
     return second_large;
 }
 
+int secondSmallestElement(int arr[], int n){
+    int small = INT_MAX;
+    int second_small = INT_MAX;
+    for(int i = 0; i < n; i++){
+        if(arr[i] < small){
+            second_small = small;
+            small = arr[i];
+        }else if(arr[i] < second_small && arr[i] != small){
+            second_small = arr[i]; 
+        }
+    }
+    return second_small;
+}
 
 int main(){ 
     int arr[] = {8, 8, 7, 6, 5};
     int n = 5;
-    int ans = secondLargestElement(arr, n);
-    cout << "Ans: " << ans << endl;
+    int secondLargest = secondLargestElement(arr, n);
+    int secondSmallest = secondSmallestElement(arr, n);
+    cout << "Second largest: " << secondLargest << endl;
+    cout << "Second smallest: " << secondSmallest << endl;
     return 0;
 }
 
