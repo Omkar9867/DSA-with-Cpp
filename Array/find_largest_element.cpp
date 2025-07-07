@@ -11,11 +11,30 @@ using namespace std;
 
 
 //--------------------------Optimal Approach O(n)---------------------
+// int largestElm(int arr[], int n){
+//     int ans = 0;
+//     for(int i=0; i<n; i++){
+//         if(arr[i] > ans){
+//             ans = arr[i];
+//         }
+//     }
+//     return ans;
+// }
+
+//--------------------------My demo Approach O(n)---------------------
 int largestElm(int arr[], int n){
-    int ans = 0;
-    for(int i=0; i<n; i++){
-        if(arr[i] > ans){
-            ans = arr[i];
+    int ans = arr[0];
+    int st = 0, ed = n-1;
+    while(st <= ed){
+        if(arr[st] > ans){
+            ans = arr[st];
+            st++;
+        }else if(arr[ed] > ans){
+            ans = arr[ed];
+            ed--;
+        }else{
+            st++;
+            ed--;
         }
     }
     return ans;
@@ -24,8 +43,8 @@ int largestElm(int arr[], int n){
 
 int main(){
     // vector<int> arr = {2,5,1,3,0};
-    int arr[] = {2,5,1,3,0};
-    int n = 5;
+    int arr[] = {2,5,1,7,0,8,9,0,3};
+    int n = 9;
     // int largestElemet = largestElm(arr);
     int largestElemet = largestElm(arr, n);
     cout << "Ans: " << largestElemet << endl;
