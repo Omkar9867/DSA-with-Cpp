@@ -3,18 +3,34 @@
 #include <set>
 using namespace std;
 
+// -------------------------------------BruteForce Approach TC->O(n*logn)+O(n)-----SC->O(n)------------------
+
+// int removeDuplicates(vector<int>& nums){
+//     set <int> set;
+//     int n = nums.size();
+//     for(int i = 0; i < n; i++){
+//         set.insert(nums[i]);
+//     }
+//     int k = set.size();
+//     int j = 0;
+//     for(int x: set){
+//         nums[j++] = x;
+//     }
+//     return k;
+// }
+
+// ------------------------------- Optimal Approach TC-->O(n)------SC-->O(1)----------------------
+
 int removeDuplicates(vector<int>& nums){
-    set <int> set;
     int n = nums.size();
-    for(int i = 0; i < n; i++){
-        set.insert(nums[i]);
+    int i = 0;
+    for (int j = 1; j < n; j++) {
+        if (nums[i] != nums[j]) {
+        i++;
+        nums[i] = nums[j];
+        }
     }
-    int k = set.size();
-    int j = 0;
-    for(int x: set){
-        nums[j++] = x;
-    }
-    return k;
+    return i + 1;
 }
 
 int main(){
@@ -27,6 +43,7 @@ int main(){
     cout << "No. of Duplicates: " << numOfDuplicates << endl;
     return 0;
 }
+//*basically keep the loop moving ahead until same when different from the i just assign the current element to the next position of i, 
 
 // 26. Remove Duplicates from Sorted Array
 
