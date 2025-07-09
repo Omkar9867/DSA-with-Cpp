@@ -21,7 +21,6 @@ int main(){
     bool isSorted = checkIsSorted(arr, n);
     cout << "Arr sorted is " << boolList[isSorted] << endl;
     return 0;
-    return 0;
 }
 
 // 1752. Check if Array Is Sorted and Rotated
