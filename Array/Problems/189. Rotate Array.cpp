@@ -1,12 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
+// -------------------------Brute Force Approach----------------
+// Time limit exceed, where insert takes O(n) as well as erase, so it is running k times
+//If both n and k are large, this results in a quadratic time complexity (O(n * k)), which can easily lead to a Time Limit Exceeded (TLE) error.
+
 void rotate(vector<int>& nums, int k){
-    // for(int i = nums.size() - 1; i >= nums.size() - k; i--){
-    //     nums.insert(nums.begin(), nums[i]);
-    //     nums.erase(nums.begin() + i + 1);
-    // }
     int i = 0;
     int n = nums.size() - 1;
     while(i<k){
@@ -14,6 +15,20 @@ void rotate(vector<int>& nums, int k){
         nums.erase(nums.begin() + n + 1);
         i++ ;
     }
+};
+
+// -------------------------Optimal Approach TC--->O(n)--SC-->O(1)-------------------
+void rotate(vector<int>& nums, int k){
+    k = k % nums.size(); // Handle cases where k >= nums.size()
+    
+    // Reverse the entire vector
+    reverse(nums.begin(), nums.end());
+    
+    // Reverse the first k elements
+    reverse(nums.begin(), nums.begin() + k);
+    
+    // Reverse the remaining elements
+    reverse(nums.begin() + k, nums.end());
 };
 
 int main(){
