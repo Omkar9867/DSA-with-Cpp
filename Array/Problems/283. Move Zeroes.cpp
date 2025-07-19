@@ -2,14 +2,30 @@
 #include <vector>
 using namespace std;
 
+
+//* This approach gives error: heap-buffer-overflow
+// void moveZeroes(vector<int>& nums) {
+//     int st = 0, ed = 0;
+//     if(nums.size() == 1){
+//         return;
+//     }
+//     while(ed < nums.size()){
+//         if(nums[ed] != 0){
+//             swap(nums[st], nums[ed]);
+//             st++;
+//         }else{
+//             ed++;
+//         }
+//     }
+// } 
+
+// --------------My Approach--------------
 void moveZeroes(vector<int>& nums) {
-    int st = 0, ed = 0;
-    while(ed < nums.size()){
-        if(nums[ed] != 0){
-            swap(nums[st], nums[ed]);
-            st++;
-        }else{
-            ed++;
+    int j = 0;
+    for(int i=0; i<nums.size(); i++){
+        if(nums[i] != 0){
+            swap(nums[j] , nums[i]);
+            j++;
         }
     }
 } 
