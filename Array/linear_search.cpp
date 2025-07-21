@@ -4,17 +4,6 @@ using namespace std;
 
 //-----------------------------------BruteForce Approach O(n)-------------------
 
-// int findPresentNum(vector<int> arr, int num){
-//     for(int i = 0; i < arr.size(); i++){
-//         if(arr[i] == num){
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
-
-// -------------------------------- 
-
 int findPresentNum(vector<int> arr, int num){
     for(int i = 0; i < arr.size(); i++){
         if(arr[i] == num){
@@ -23,6 +12,7 @@ int findPresentNum(vector<int> arr, int num){
     }
     return -1;
 }
+
 
 int main(){
     vector<int> arr = {1, 2, 3, 4, 5};
