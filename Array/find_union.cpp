@@ -4,7 +4,7 @@
 #include <map>
 using namespace std;
 
-//-----------------------------Brute Force O(n)-------------------
+//-----------------------------Brute Force O(nlogn)-------------------
 // vector<int> unionArr(vector<int> arr1, vector<int> arr2){
 //     vector<int> tempArr;
 //     tempArr.resize(arr1.size()+arr2.size());
@@ -19,23 +19,55 @@ using namespace std;
 //     return tempArr;
 // }
 
+
+//-----------------------------Better Approach-O(nlogn)-----------------------
+// vector<int> unionArr(vector<int> arr1, vector<int> arr2){
+//     vector<int> tempArr;
+//     map<int, int> freq;
+//     for(int i = 0; i<arr1.size(); i++){
+//         freq[arr1[i]]++;
+//     }
+//     for(int i = 0; i<arr2.size(); i++){
+//         freq[arr2[i]]++;
+//     }
+//     for(auto & it: freq){
+//         tempArr.push_back(it.first);
+//     }
+//     return tempArr;
+// }
+
+//-----------------------------Optimal Approach-O(n)-----------------------
 vector<int> unionArr(vector<int> arr1, vector<int> arr2){
     vector<int> tempArr;
-    map<int, int> freq;
-    for(int i = 0; i<arr1.size(); i++){
-        freq[arr1[i]]++;
+    int i = 0, j = 0;
+
+    // loop until i exceeds arr1 and j exceeds arr2
+    while(i < arr1.size() && j < arr2.size()){
+        if(arr1[i] <= arr2[j]){
+            if(tempArr.size() == 0 || tempArr.back() != arr1[i])
+                tempArr.push_back(arr1[i]);
+                i++;
+        }else{
+            if(tempArr.size() == 0 ||tempArr.back() != arr2[j])
+                tempArr.push_back(arr2[j]);
+                j++;
+        }
     }
-    for(int i = 0; i<arr2.size(); i++){
-        freq[arr2[i]]++;
+    while(i < arr1.size()){ // IF any element left in arr1 
+        if(tempArr.back() != arr1[i])
+            tempArr.push_back(arr1[i]);
+            i++;
     }
-    for(auto & it: freq){
-        tempArr.push_back(it.first);
+    while(j < arr2.size()){ // IF any element left in arr2
+        if(tempArr.back() != arr2[j])
+            tempArr.push_back(arr2[j]);
+            j++;
     }
     return tempArr;
 }
 
 int main(){
-    vector<int> arr1 = {1,2,3,4,5};  
+    vector<int> arr1 = {1,2,3,4,5,6};  
     vector<int> arr2 = {2,3,4,4,5};
 
     vector<int> result = unionArr(arr1, arr2);
