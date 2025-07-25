@@ -8,14 +8,14 @@ using namespace std;
 int missingNumber(vector<int>& nums){
 
     // Outer loop that runs from 1 to N:
-    for (int i = 1; i <= nums.size(); i++) {
+    for (int i = 0; i <= nums.size(); i++) {
 
         // flag variable to check
         //if an element exists
         int flag = 0;
 
         //Search the element using linear search:
-        for (int j = 0; j < nums.size() - 1; j++) {
+        for (int j = 0; j < nums.size(); j++) {
             if (nums[j] == i) {
 
                 // i is present in the array:
@@ -36,7 +36,7 @@ int missingNumber(vector<int>& nums){
 };
 
 int main(){
-    vector<int> arr = {9,6,4,2,3,5,7,0,1};
+    vector<int> arr = {9,8,4,2,3,5,7,0,1};
     int result = missingNumber(arr);
     cout << "Result: " << result << endl;
     return 0;
