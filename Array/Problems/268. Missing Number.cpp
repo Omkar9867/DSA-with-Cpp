@@ -3,40 +3,52 @@
 #include <algorithm>
 using namespace std;
 
-// -------------------------Brute Force Approach----------------
+// -------------------------Brute Force Approach O(n^2)----------------
+// int missingNumber(vector<int>& nums){
 
+//     // Outer loop that runs from 1 to N:
+//     for (int i = 0; i <= nums.size(); i++) {
+
+//         // flag variable to check
+//         //if an element exists
+//         int flag = 0;
+
+//         //Search the element using linear search:
+//         for (int j = 0; j < nums.size(); j++) {
+//             if (nums[j] == i) {
+
+//                 // i is present in the array:
+//                 flag = 1;
+//                 break;
+//             }
+//         }
+
+//         // check if the element is missing
+//         //i.e flag == 0:
+
+//         if (flag == 0) return i;
+//     }
+
+//     // The following line will never execute.
+//     // It is just to avoid warnings.
+//     return -1;
+// };
+
+//-------------------------------Better Approach TC-->O(n) but SC-->O(n)----------------
 int missingNumber(vector<int>& nums){
-
-    // Outer loop that runs from 1 to N:
-    for (int i = 0; i <= nums.size(); i++) {
-
-        // flag variable to check
-        //if an element exists
-        int flag = 0;
-
-        //Search the element using linear search:
-        for (int j = 0; j < nums.size(); j++) {
-            if (nums[j] == i) {
-
-                // i is present in the array:
-                flag = 1;
-                break;
-            }
-        }
-
-        // check if the element is missing
-        //i.e flag == 0:
-
-        if (flag == 0) return i;
-    }
-
-    // The following line will never execute.
-    // It is just to avoid warnings.
-    return -1;
-};
+    int hashArr[nums.size()] = {0};
+    // storing the frequencies of each nums val
+    for(int i = 0; i < nums.size(); i++){
+        hashArr[nums[i]]++;
+    };
+    for(int i = 0; i < nums.size(); i++){
+        if(hashArr[i] == 0) return i;
+    };
+    
+}
 
 int main(){
-    vector<int> arr = {9,8,4,2,3,5,7,0,1};
+    vector<int> arr = {9,6,4,2,3,5,7,0,1};
     int result = missingNumber(arr);
     cout << "Result: " << result << endl;
     return 0;
