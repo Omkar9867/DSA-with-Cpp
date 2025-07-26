@@ -48,18 +48,31 @@ using namespace std;
 // }
 
 // -------------------------------Optimal Approach 1 TC-O(n)-------------------------
+// int missingNumber(vector<int>& nums){
+//     int n = nums.size();
+//     int sumOfn = n * (n+1) / 2;
+//     int sumOfVal = 0;
+//     for (int i = 0; i < n; i++){
+//         sumOfVal += nums[i];
+//     }
+//     return sumOfn - sumOfVal;
+// }
+
+
+// ------------------------------- XOR Approach TC-O(n) -- SC(1)----(//*Details explain last)-------------------------
 int missingNumber(vector<int>& nums){
     int n = nums.size();
-    int sumOfn = n * (n+1) / 2;
-    int sumOfVal = 0;
+    int xor1 = 0 , xor2 = 0;
     for (int i = 0; i < n; i++){
-        sumOfVal += nums[i];
+        xor1 ^= nums[i];
+        xor2 ^= i + 1;
     }
-    return sumOfn - sumOfVal;
+    return xor1 ^ xor2;
 }
 
+
 int main(){
-    vector<int> arr = {0,1};
+    vector<int> arr = {9,6,4,2,3,5,7,0,1};
     int result = missingNumber(arr);
     cout << "Result: " << result << endl;
     return 0;
@@ -95,3 +108,23 @@ int main(){
 // All the numbers of nums are unique.
 
 // Follow up: Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
+
+
+// XOR Approach:
+// Intuition:
+// Two important properties of XOR are the following:
+
+// XOR of two same numbers is always 0 i.e. a ^ a = 0. ←Property 1.
+// XOR of a number with 0 will result in the number itself i.e. 0 ^ a = a.  ←Property 2
+
+// Now, let’s XOR all the numbers between 1 to N.
+// xor1 = 1^2^.......^N
+
+// Let’s XOR all the numbers in the given array.
+// xor2 = 1^2^......^N (contains all the numbers except the missing one).
+
+// Now, if we again perform XOR between xor1 and xor2, we will get:
+// xor1 ^ xor2 = (1^1)^(2^2)^........^(missing Number)^.....^(N^N)
+
+// Here all the numbers except the missing number will form a pair and each pair will result in 0 according to the XOR property. 
+// The result will be = 0 ^ (missing number) = missing number (according to property 2).
