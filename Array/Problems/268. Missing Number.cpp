@@ -35,20 +35,31 @@ using namespace std;
 // };
 
 //-------------------------------Better Approach TC-->O(n) but SC-->O(n)----------------
-int missingNumber(vector<int>& nums){
-    int hashArr[nums.size()] = {0};
-    // storing the frequencies of each nums val
-    for(int i = 0; i < nums.size(); i++){
-        hashArr[nums[i]]++;
-    };
-    for(int i = 0; i < nums.size(); i++){
-        if(hashArr[i] == 0) return i;
-    };
+// int missingNumber(vector<int>& nums){
+//     int hashArr[nums.size()] = {0};
+//     // storing the frequencies of each nums val
+//     for(int i = 0; i < nums.size(); i++){
+//         hashArr[nums[i]]++;
+//     };
+//     for(int i = 0; i < nums.size(); i++){
+//         if(hashArr[i] == 0) return i;
+//     };
     
+// }
+
+// -------------------------------Optimal Approach 1 TC-O(n)-------------------------
+int missingNumber(vector<int>& nums){
+    int n = nums.size();
+    int sumOfn = n * (n+1) / 2;
+    int sumOfVal = 0;
+    for (int i = 0; i < n; i++){
+        sumOfVal += nums[i];
+    }
+    return sumOfn - sumOfVal;
 }
 
 int main(){
-    vector<int> arr = {9,6,4,2,3,5,7,0,1};
+    vector<int> arr = {0,1};
     int result = missingNumber(arr);
     cout << "Result: " << result << endl;
     return 0;
