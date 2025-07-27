@@ -48,15 +48,15 @@ using namespace std;
 // }
 
 // -------------------------------Optimal Approach 1 TC-O(n)-------------------------
-// int missingNumber(vector<int>& nums){
-//     int n = nums.size();
-//     int sumOfn = n * (n+1) / 2;
-//     int sumOfVal = 0;
-//     for (int i = 0; i < n; i++){
-//         sumOfVal += nums[i];
-//     }
-//     return sumOfn - sumOfVal;
-// }
+int missingNumber(vector<int>& nums){
+    int n = nums.size();
+    int sumOfn = n * (n+1) / 2;
+    int sumOfVal = 0;
+    for (int i = 0; i < n; i++){
+        sumOfVal += nums[i];
+    }
+    return sumOfn - sumOfVal;
+}
 
 
 // ------------------------------- XOR Approach TC-O(n) -- SC(1)----(//*Details explain last)-------------------------

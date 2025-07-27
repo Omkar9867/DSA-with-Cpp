@@ -4,7 +4,7 @@ using namespace std;
 
 int findMaxConsecutiveOnes(vector<int> nums){
     int count = 0, count2 = 0;
-    for(int i=1; i<nums.size(); i++){
+    for(int i=0; i<nums.size(); i++){
         if(nums[i] == 1){
             count2++;
             if(count < count2){
