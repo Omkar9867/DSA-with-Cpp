@@ -6,20 +6,20 @@ using namespace std;
 //
 
 //------------------------------------Brute force TC-->O(n^2)-----------------------
-int singleNumber(vector<int> nums){
-    int n = nums.size();
-    for(int i = 0; i < n; i++){
-        int count = 0;
-        for(int j = 0; j < n; j++){
-            if(nums[i] == nums[j]){
-                count++;
-            }
-        }
-        if(count == 1){
-            return nums[i];
-        }
-    }
-}
+// int singleNumber(vector<int> nums){
+//     int n = nums.size();
+//     for(int i = 0; i < n; i++){
+//         int count = 0;
+//         for(int j = 0; j < n; j++){
+//             if(nums[i] == nums[j]){
+//                 count++;
+//             }
+//         }
+//         if(count == 1){
+//             return nums[i];
+//         }
+//     }
+// }
 
 //------------------------------------Better Approach TC-->O(n) but SC-->O(n)-----------------------
 // int singleNumber(vector<int> nums){
@@ -35,22 +35,18 @@ int singleNumber(vector<int> nums){
 //     }
 // }
 
-// -------------------------------------
-// int singleNumber(vector<int> nums){
-//     int n = nums.size();
-//     unordered_map<int, int> hashArr;
-//     for(int i = 0; i < n; i++){
-//         hashArr[nums[i]] += 1;
-//     }
-//     for(const auto& it : hashArr){
-//         if(it.second == 1){
-//             return it.first;
-//         }
-//     }
-// }
+// -----------------------------------Optimal Approach Bitwise xor Approach---TC-->O(n) but SC-->O(1) -----------------
+int singleNumber(vector<int> nums){
+    int n = nums.size();
+    int xorr = 0;
+    for(int i = 0; i < n; i++){
+        xorr ^= nums[i]; 
+    }
+    return xorr;
+}
 
 int main(){
-    vector<int> arr = {2,2,1};
+    vector<int> arr = {4,1,2,1,2};
     int result = singleNumber(arr);
     cout << "Result: " << result << endl;
     return 0;
