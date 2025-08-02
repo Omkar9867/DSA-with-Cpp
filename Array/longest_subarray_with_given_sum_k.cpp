@@ -21,31 +21,54 @@
 //     return count1;
 // }
 
-// --------------------------------Better Solution--------------- 
+// --------------------------------Better Solution O(n^2)--------------- 
+// int longestSubArray(std::vector<int> arr, long long k){
+//     std::map<long long, int> preSumMap;       
+//     long long sum = 0;
+//     int maxLen = 0;
+//     for(int i = 0; i < arr.size(); i++){
+//         sum += arr[i];
+//         if(sum == k){
+//             maxLen = std::max(maxLen, i+1);
+//         }
+//         int rem = sum - k;
+//         if(preSumMap.find(rem) != preSumMap.end()){
+//             int len = i - preSumMap[rem];
+//             maxLen = std::max(maxLen, len);
+//         }
+//         preSumMap[sum] = i;
+//     }
+//     return maxLen;
+// }
+
+// ------------------------------------ Optimal Solution --------------------
 int longestSubArray(std::vector<int> arr, long long k){
-    std::map<long long, int> preSumMap;       
-    long long sum = 0;
-    int maxLen = 0;
-    for(int i = 0; i < arr.size(); i++){
-        sum += arr[i];
+    int maxLength = 0;
+    int n = arr.size();
+    int i = 0, j = 0;
+    long long sum = arr[i];
+    while(j < n){
         if(sum == k){
-            maxLen = std::max(maxLen, i+1);
+            std::cout << "Yes....: " << sum << std::endl; 
+            maxLength = std::max(maxLength, (j - i + 1));
+            std::cout << "Max Length now....: " << maxLength << std::endl; 
+            std::cout << "I: " << i << " J:" << j << std::endl; 
+            i++;
+            sum -= arr[i];
+        }else{
+            j++;
         }
-        int rem = sum - k;
-        if(preSumMap.find(rem) != preSumMap.end()){
-            int len = i - preSumMap[rem];
-            maxLen = std::max(maxLen, len);
-        }
-        preSumMap[sum] = i;
+        sum += arr[j];
+        std::cout << "Sum : " << sum << std::endl; 
     }
-    return maxLen;
+    return maxLength;
 }
 
 int main(){
     int n = 5;
     // int arr[n] = {2,3,5,1,9};
-    std::vector<int> arr = {2,3,5,1,9};
-    int k = 10;
+    std::vector<int> arr = {2,3,5};
+    int k = 5;
     // int result = longestSubArray(arr, k, n);
     int result = longestSubArray(arr, k);
     std::cout << "Result : " << result << std::endl; 
