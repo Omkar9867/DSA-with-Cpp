@@ -45,21 +45,18 @@
 int longestSubArray(std::vector<int> arr, long long k){
     int maxLength = 0;
     int n = arr.size();
-    int i = 0, j = 0;
-    long long sum = arr[i];
-    while(j < n){
-        if(sum == k){
-            std::cout << "Yes....: " << sum << std::endl; 
-            maxLength = std::max(maxLength, (j - i + 1));
-            std::cout << "Max Length now....: " << maxLength << std::endl; 
-            std::cout << "I: " << i << " J:" << j << std::endl; 
-            i++;
-            sum -= arr[i];
-        }else{
-            j++;
-        }
+    int i = 0;
+    long long sum = 0;
+    for(int j = 0; j < n; j++){
         sum += arr[j];
-        std::cout << "Sum : " << sum << std::endl; 
+        // Shrink the window until the sum is less than or equal to k
+        while(sum > k && i <= j){
+            sum -= arr[i]; // Subtract the element at the left boundary
+            i++;
+        }
+        if (sum == k) {
+            maxLength = std::max(maxLength, j - i + 1);
+        }
     }
     return maxLength;
 }
