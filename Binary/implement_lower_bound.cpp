@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 
-//------------------------------------ My approach
+//------------------------------------ My approach -- Wroing understanding----
 
 // int lowerBound(std::vector<int>& nums, int k){
 //     int st = 0, ed = nums.size();
 //     while(st <= ed){
 //         int mid = st + (ed - st)/2;
 //         if(nums[mid] == k){
-//             return mid-1;
+//             return mid;
 //         }else if(nums[mid - 1] < k && nums[mid + 1] > k){
 //             return mid;
 //         }else if(nums[mid] > k){
@@ -38,8 +38,8 @@ int lowerBound(std::vector<int>& nums, int k){
 
 
 int main(){
-    std::vector<int> arr = {1, 1,3,4};
-    int k = 2;
+    std::vector<int> arr = {3,5,8,15,19};
+    int k = 9;
     int result = lowerBound(arr, k);
     std::cout<< "Result: " << result << std::endl;
     return 0;
@@ -60,3 +60,8 @@ int main(){
 // Input Format: N = 5, arr[] = {3,5,8,15,19}, x = 9
 // Result: 3
 // Explanation: Index 3 is the smallest index such that arr[3] >= x.
+
+// What is Lower Bound?
+// The lower bound algorithm finds the first or the smallest index in a sorted array where the value at that index is greater than or equal to a given key i.e. x.
+
+// The lower bound is the smallest index, ind, where arr[ind] >= x. But if any such index is not found, the lower bound algorithm returns n i.e. size of the given array.
