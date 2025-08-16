@@ -2,35 +2,71 @@
 #include <vector>
 
 //-----------------------------------------------My Approach-----------------------------
+// std::vector<int> findFloorAndCeil(std::vector<int> nums, int x){
+//     int n = nums.size()-1;
+//     int st = 0, ed = n;
+//     std::vector<int> result(2);
+//     while(st <= ed){
+//         int mid = st + (ed - st) / 2;
+//         if(nums[mid] > x){
+//             result.clear();
+//             result.push_back(nums[mid - 1]);
+//             result.push_back(nums[mid]);
+//             ed = mid - 1;
+//         }else if(nums[mid] < x){
+//             result.clear();
+//             result.push_back(nums[mid]);
+//             result.push_back(nums[mid + 1]);
+//             st = mid + 1;
+//         }else{
+//             result.clear();
+//             result.push_back(nums[mid]);
+//             result.push_back(nums[mid]);
+//             break;
+//         }
+//     }
+//     return result;
+// }
+
+// ------------------------- Better code placement---------------
 std::vector<int> findFloorAndCeil(std::vector<int> nums, int x){
     int n = nums.size()-1;
     int st = 0, ed = n;
-    std::vector<int> result(2);
+    int floor = -1, ceil = -1; 
+    // find floor
     while(st <= ed){
         int mid = st + (ed - st) / 2;
         if(nums[mid] > x){
-            result.clear();
-            result.push_back(nums[mid - 1]);
-            result.push_back(nums[mid]);
             ed = mid - 1;
         }else if(nums[mid] < x){
-            result.clear();
-            result.push_back(nums[mid]);
-            result.push_back(nums[mid + 1]);
+            floor = nums[mid];
             st = mid + 1;
         }else{
-            result.clear();
-            result.push_back(nums[mid]);
-            result.push_back(nums[mid]);
-            break;
+            floor = ceil = nums[mid];
+            return {floor, ceil};
         }
     }
-    return result;
+    // find ceil // first reset st and ed
+    st = 0, ed = n;
+    while(st <= ed){
+        int mid = st + (ed - st) / 2;
+        if(nums[mid] > x){
+            ceil = nums[mid];
+            ed = mid - 1;
+        }else if(nums[mid] < x){
+            st = mid + 1;
+        }else{
+            floor = ceil = nums[mid];
+            return {floor, ceil};
+        }
+    }
+    
+    return {floor, ceil};
 }
 
 int main(){
     std::vector<int> arr = {3, 4, 4, 7, 8, 10};
-    int k = 8;
+    int k = 5;
     std::vector<int> result = findFloorAndCeil(arr, k);
     for(int i=0; i<result.size(); i++){
         std::cout << result[i] << " " ; 
