@@ -6,18 +6,18 @@ bool search(std::vector<int>& nums, int target){
     int st = 0, ed = n - 1;
     while(st <= ed){
         int mid = st + (ed - st) / 2;
-        std::cout << "Mid now is: " << mid << std::endl;
+        // std::cout << "Mid now is: " << mid << std::endl;
         if(nums[mid] == target){
             return true;
         }
-        // Eliminated the numbersif condition meets arr[st] == arr[mid] == arr[ed];
-        else if(nums[st] == nums[mid]){
+        // Eliminated the numbers if condition meets arr[st] == arr[mid] == arr[ed];
+        else if(nums[st] == nums[mid] && nums[ed] == nums[mid]){
             st = st+1;
-        }else if(nums[ed] == nums[mid]){
             ed = ed-1;
-        }else if(nums[st] < nums[mid]){ // means left is sorted
+            continue;
+        }else if(nums[st] <= nums[mid]){ // means left is sorted
             int exp = nums[st] <= nums[mid];
-            std::cout << "It is left side: " << exp << std::endl;
+            // std::cout << "It is left side: " << exp << std::endl;
             if(nums[st] <= target && target <= nums[mid]){
                 ed = mid - 1;
             }else{
