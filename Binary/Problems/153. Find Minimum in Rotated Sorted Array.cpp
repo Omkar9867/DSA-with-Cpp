@@ -6,9 +6,19 @@ int findMin(std::vector<int>& nums){
     int result = INT_MAX;
     int n = nums.size();
     int st = 0, ed = n - 1;
+    if(n == 2){
+        if(nums[0] > nums[1]){
+            return nums[1];
+        }else{
+            return nums[0];
+        }
+    }
     while(st <= ed){
         int mid = st + (ed - st) / 2;
-        if(nums[st] < nums[mid]){
+        if(nums[st] <= nums[ed]){ // if completely sorted then break
+            result = std::min(result, nums[st]);
+            break;
+        }else if(nums[st] < nums[mid]){
             result = std::min(result, nums[st]);
             st = mid + 1; // Eliminate the left half
         }else{
@@ -21,7 +31,7 @@ int findMin(std::vector<int>& nums){
 // Logic is if we found the sorted half will have the min value so now we can completetly eliminate that half
 
 int main(){
-    std::vector<int>number = {11,13,15,17};
+    std::vector<int>number = {2,3,4,5,1};
     std::cout << "Min value in sorted arr = " << findMin(number) << std::endl;
 
     return 0;
