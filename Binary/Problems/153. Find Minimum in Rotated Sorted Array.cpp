@@ -3,30 +3,29 @@
 #include <climits>
 
 int findMin(std::vector<int>& nums){
-    int result = INT_MAX;
     int n = nums.size();
     int st = 0, ed = n - 1;
-    if(n == 2){
-        if(nums[0] > nums[1]){
-            return nums[1];
-        }else{
-            return nums[0];
-        }
+    if(nums[st] <= nums[ed]){
+        return nums[st];
     }
     while(st <= ed){
         int mid = st + (ed - st) / 2;
-        if(nums[st] <= nums[ed]){ // if completely sorted then break
-            result = std::min(result, nums[st]);
-            break;
-        }else if(nums[st] < nums[mid]){
-            result = std::min(result, nums[st]);
-            st = mid + 1; // Eliminate the left half
+        // Checking if mid is the min element , so no need to handle single or double value cases
+        if(nums[mid] > nums[mid + 1]){
+            return  nums[mid + 1];
+        }
+        if(nums[mid - 1] > nums[mid]){
+            return  nums[mid];
+        }
+
+        // Now determine which half to eliminate
+        if(nums[mid] >= nums[st]){
+            st = mid + 1;
         }else{
-            result = std::min(result, nums[mid]);
             ed = mid - 1;
         }
     }
-    return result;
+    return -1;
 }
 // Logic is if we found the sorted half will have the min value so now we can completetly eliminate that half
 
