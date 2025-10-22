@@ -2,19 +2,17 @@
 
 bool isIsomorphic(std::string s, std::string t) {
     int n = s.size();
-    int m = t.size();
-    if(n != m){
-        return false;
-    }
-    for(int i = 0; i < n; i++){
-       if(s[i] > 0 && s[i] == s[i - 1]){
-        if(t[i] != t[i-1]){
+    int m1[256] = {0}, m2[256] = {0}; //For storing the array of of characted of s and t
+    for(int i = 0; i< n; i++){
+        if(m1[s[i]] != m2[t[i]]){
             return false;
         }
-       }
+        m1[s[i]] = i+1;
+        m2[t[i]] = i+1;
     }
     return true;
 }
+//! Need to understand well
 
 int main(){
     std::string s = "egg";
