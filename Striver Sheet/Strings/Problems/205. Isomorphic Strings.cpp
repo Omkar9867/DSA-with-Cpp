@@ -12,7 +12,6 @@ bool isIsomorphic(std::string s, std::string t) {
     }
     return true;
 }
-//! Need to understand well
 
 int main(){
     std::string s = "egg";
@@ -57,3 +56,18 @@ int main(){
 // 1 <= s.length <= 5 * 104
 // t.length == s.length
 // s and t consist of any valid ascii character.
+
+
+// 🧮 Example 1: "egg" vs "add"
+// i	s[i]	t[i]	m1[s[i]]	m2[t[i]]	Equal?	Action
+// 0	'e' 	'a' 	    0          0	    ✅ yes	m1['e']=1, m2['a']=1
+// 1	'g' 	'd' 	    0          0	    ✅ yes	m1['g']=2, m2['d']=2
+// 2	'g' 	'd' 	    2          2	    ✅ yes	m1['g']=3, m2['d']=3
+
+// No mismatches → returns true.
+
+// 🧮 Example 2: "foo" vs "bar"
+// i	s[i]	t[i]	m1[s[i]]	m2[t[i]]	Equal?	Action
+// 0	'f' 	'b' 	    0          0	    ✅ yes	m1['f']=1, m2['b']=1
+// 1	'o' 	'a' 	    0          0	    ✅ yes	m1['o']=2, m2['a']=2
+// 2	'o' 	'r' 	    2          0	    ❌ no	return false
