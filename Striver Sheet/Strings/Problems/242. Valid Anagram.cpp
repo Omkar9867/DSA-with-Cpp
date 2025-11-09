@@ -2,23 +2,48 @@
 #include <algorithm>
 
 
+// bool isAnagram(std::string s, std::string t) {
+//     int n1 = s.length(), n2 = t.length();
+//     if(n1 != n2){
+//         return false;
+//     }
+//     int m1[256] = {0}, m2[256] = {0};
+//     // insert all the s characters in an array
+//     for(int i = 0; i<n1; i++){
+//         m1[s[i]] += 1;
+//     }
+//     // insert all the t characters and simultaneously compare
+//     for(int i = 0; i<n2; i++){
+//         m2[t[i]] += 1;
+//     }
+//     for(int i = 0; i<n2; i++){
+//         std::cout << m1[t[i]] << " ==> " << m2[t[i]] << std::endl;
+//         if(m1[t[i]] != m2[t[i]]){
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+
+// -----------------------------For Space complexity O(1)----------------------------
 bool isAnagram(std::string s, std::string t) {
     int n1 = s.length(), n2 = t.length();
     if(n1 != n2){
         return false;
     }
-    int m1[256] = {0}, m2[256] = {0};
+    // int freq[26] = {0}; //! Out of bond error
+    int freq[256] = {0};
     // insert all the s characters in an array
     for(int i = 0; i<n1; i++){
-        m1[s[i]] += 1;
+        freq[s[i] - 'A']++ ;
     }
     // insert all the t characters and simultaneously compare
     for(int i = 0; i<n2; i++){
-        m2[t[i]] += 1;
+        freq[t[i] - 'A']--;
     }
-    for(int i = 0; i<n2; i++){
-        std::cout << m1[t[i]] << " ==> " << m2[t[i]] << std::endl;
-        if(m1[t[i]] != m2[t[i]]){
+    // Since we iterate through each letter and it should nullify i.e. 0 to each character after 2nd loop , if not then one ch left and not anagram
+    for(int i = 0; i< 26; i++){
+        if(freq[i] != 0){
             return false;
         }
     }
