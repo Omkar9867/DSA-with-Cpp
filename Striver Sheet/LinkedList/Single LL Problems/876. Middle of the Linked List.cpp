@@ -26,20 +26,32 @@ public:
         return result;
     }
 
+    //-------------------------------------------------Brute Force Approach O(N+N/2) ~ O(N)-------------------
+    // Node* middleNode(Node* head) {
+    //     Node*temp = head;
+    //     int length = lengthOfList(temp);
+    //     int mid = (length / 2);
+    //     int i = 0;
+    //     while(i < mid){
+    //         // mid--;
+    //         // if(mid == 0){    //? Can do in both iteration way!
+    //         //     break;
+    //         // }
+    //         temp = temp->next;
+    //         i++;
+    //     }
+    //     return temp;
+    // }
+
+    //-------------------------------------------------Optimal Approach O(N+N/2) ~ O(N)-------------------
     Node* middleNode(Node* head) {
-        Node*temp = head;
-        int length = lengthOfList(temp);
-        int mid = (length / 2);
-        int i = 0;
-        while(i < mid){
-            // mid--;
-            // if(mid == 0){    //? Can do in both iteration way!
-            //     break;
-            // }
-            temp = temp->next;
-            i++;
+        Node*fast = head; 
+        Node*slow = head;
+        while(fast != NULL && fast->next != nullptr){
+            fast = fast->next->next;
+            slow = slow->next;
         }
-        return temp;
+        return slow;
     }
 
     void printList(Node* head){
@@ -57,8 +69,9 @@ int main(){
     Solution sol;
 
     Node* head = new Node(0);
-    head->next = new Node(1);
+    head->next = new Node(3);
     head->next->next = new Node(2);
+    head->next->next->next = new Node(4);
 
     Node* result = sol.middleNode(head);
     std::cout << std::endl;
