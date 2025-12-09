@@ -17,25 +17,41 @@ struct Node{
 
 class Solution{
 public:
-    //-------------------------------------------------Brute Force Approach-------------------
+    //-------------------------------------------------Brute Force Approach TC->O(N) -- SC->O(N) -------------------
     //Hint: Since stacks follow Last-In-First-Out (LIFO) order, popping elements from the stack gives us the values in reverse order. 
     // After the stack is filled, we reassign the values to the nodes while traversing the original list again. 
     // This effectively reverses the list in terms of values without modifying node links.
+    // Node* reverseList(Node* head) {
+    //     Node* temp = head;
+    //     std::stack<int> st; 
+    //     while(temp != NULL){
+    //         st.push(temp->value);
+    //         temp = temp->next;
+    //     }
+    //     // Reset the temp to head as it got null above;
+    //     temp = head;
+    //     while(temp != NULL){
+    //         temp->value = st.top();
+    //         st.pop();
+    //         temp = temp->next;
+    //     }
+    //     return head; //! Understand That [temp->value = st.top()] rewrites values inside nodes, not the nodes themselves.
+    // }
+
+    // ---------------------------------------------- Optimal Approach ------------------------------
     Node* reverseList(Node* head) {
+        Node* prev = NULL;
         Node* temp = head;
-        std::stack<int> st; 
         while(temp != NULL){
-            st.push(temp->value);
-            temp = temp->next;
+            Node* front = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = front;
+            // std::cout<< "Prev val : " << prev->value << std::endl; 
+            // std::cout<< "Next temp : " << temp->next->value << std::endl; 
+            // std::cout<< "Curr temp : " << temp->value << std::endl; 
         }
-        // Reset the temp to head as it got null above;
-        temp = head;
-        while(temp != NULL){
-            temp->value = st.top();
-            st.pop();
-            temp = temp->next;
-        }
-        return head; //! Understand That [temp->value = st.top()] rewrites values inside nodes, not the nodes themselves.
+        return prev;
     }
 
     void printList(Node* head){
