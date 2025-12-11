@@ -38,20 +38,32 @@ public:
     //     return head; //! Understand That [temp->value = st.top()] rewrites values inside nodes, not the nodes themselves.
     // }
 
-    // ---------------------------------------------- Optimal Approach ------------------------------
+    // ---------------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
+    // Node* reverseList(Node* head) {
+    //     Node* prev = NULL;
+    //     Node* temp = head;
+    //     while(temp != NULL){
+    //         Node* front = temp->next;
+    //         temp->next = prev;
+    //         prev = temp;
+    //         temp = front;
+    //         // std::cout<< "Prev val : " << prev->value << std::endl; 
+    //         // std::cout<< "Next temp : " << temp->next->value << std::endl; 
+    //         // std::cout<< "Curr temp : " << temp->value << std::endl; 
+    //     }
+    //     return prev;
+    // }
+
+    // ---------------------------------------------- Recursive Approach TC->O(N) -- SC->O(1)------------------------------
     Node* reverseList(Node* head) {
-        Node* prev = NULL;
-        Node* temp = head;
-        while(temp != NULL){
-            Node* front = temp->next;
-            temp->next = prev;
-            prev = temp;
-            temp = front;
-            // std::cout<< "Prev val : " << prev->value << std::endl; 
-            // std::cout<< "Next temp : " << temp->next->value << std::endl; 
-            // std::cout<< "Curr temp : " << temp->value << std::endl; 
+        if(head == NULL || head->next == nullptr){
+            return head;
         }
-        return prev;
+        Node* newHead = reverseList(head->next); 
+        Node* front = head->next;
+        front->next = head;
+        head->next = nullptr;
+        return newHead;
     }
 
     void printList(Node* head){
