@@ -54,7 +54,7 @@ Node* deleteHead(Node* head){
     return head;
 }
 
-// ----------------------/*Delete Tail*/------------------i
+// ----------------------/*Delete Tail*/-------------------
 Node* deleteTail(Node* head){
     if(head == NULL || head->next == NULL){
         return NULL;
@@ -70,14 +70,78 @@ Node* deleteTail(Node* head){
     return head;
 }
 
+// ----------------------/*Delete kth Elem*/--------------------
+Node* deleteKElem(Node* head, int k){
+    if(head == NULL || head->next == NULL){
+        return NULL;
+    }
+    Node* temp = head;
+    int count = 0;
+    while(temp->next != NULL){
+        count++;
+        if(count == k){
+            break;
+        }else{
+            temp = temp->next;
+        }
+    }
+    if(temp->back == nullptr){
+        Node* prev = temp;
+        temp = temp->next;
+        prev->next = nullptr;
+        delete prev;
+    }else if(temp->next == nullptr){
+        Node* tail = temp;
+        temp->back = nullptr;
+        tail->back = nullptr;
+        delete tail;
+    }else{
+        Node* front = temp->next;
+        Node* prev = temp->back;
+        prev->next = front;
+        front->back = prev;
+        temp->back = nullptr;
+        temp->next = nullptr;
+        delete temp;
+    }
+    return head;
+}
+
+// ----------------------/*Remove Given Node*/------------------i
+void deleteNode(Node* head){
+    Node* temp = head;
+    Node* front = temp->next;
+    Node* prev = temp->back;
+
+    if(front == NULL){
+        prev->next = nullptr;
+        temp->back = nullptr;
+        delete temp;
+    }else{
+        prev->next = front;
+        front->back = prev;
+        temp->back = temp->next = nullptr;
+        delete temp;
+    }
+}
+
 int main(){
     std::vector <int> arr = {12, 5, 8, 7};
     Node* head = convertArr2DLL(arr);
     print(head);
     std::cout << std::endl;
+    //------------------//
     // Node* deltedHead = deleteHead(head);
     // print(deltedHead);
-    Node* deletedTail = deleteTail(head);
-    print(deletedTail);
+    //--------------------//
+    // Node* deletedTail = deleteTail(head);
+    // print(deletedTail);
+    //-------------------//
+    // int k = 3;
+    // Node* deletedK = deleteKElem(head, k);
+    // print(deletedK);
+    //-------------------//
+    deleteNode(head->next->next);
+    print(head);
     return 0;
 }
