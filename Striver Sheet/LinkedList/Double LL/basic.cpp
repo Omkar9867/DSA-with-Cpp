@@ -54,21 +54,19 @@ Node* deleteHead(Node* head){
     return head;
 }
 
-// ----------------------/*Delete Tail*/------------------
+// ----------------------/*Delete Tail*/------------------i
 Node* deleteTail(Node* head){
     if(head == NULL || head->next == NULL){
         return NULL;
     }
-    while(head != NULL){
-        if(head->next == NULL){
-            Node* prev = head;
-            head->back->next = nullptr;
-            prev->back = nullptr;
-            delete prev; 
-            break;
-        }
-        head = head->next;
+    Node* tail = head;
+    while(tail->next != NULL){
+        tail = tail->next;
     }
+    Node* prev = tail->back;
+    prev->next = nullptr;
+    tail->back = nullptr;
+    delete tail;
     return head;
 }
 
@@ -77,9 +75,9 @@ int main(){
     Node* head = convertArr2DLL(arr);
     print(head);
     std::cout << std::endl;
-    Node* deltedHead = deleteHead(head);
-    print(deltedHead);
-    Node* deltedTail = deleteTail(head);
-    print(deltedTail);
+    // Node* deltedHead = deleteHead(head);
+    // print(deltedHead);
+    Node* deletedTail = deleteTail(head);
+    print(deletedTail);
     return 0;
 }
