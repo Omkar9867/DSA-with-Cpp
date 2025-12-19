@@ -61,8 +61,11 @@ int main(){
 
     Node* head = new Node(3);
     head->next = new Node(2);
+    Node* nodeSecond = head->next;
+    std::cout << nodeSecond->val << std::endl;
     head->next->next = new Node(0);
     head->next->next->next = new Node(-4);
+    head->next->next->next->next = nodeSecond;
 
     bool result = sol.hasCycle(head);
     std::cout << "Result of cycle LL is : "<< result << std::endl;
