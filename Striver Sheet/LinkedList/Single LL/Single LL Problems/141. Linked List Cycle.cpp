@@ -36,7 +36,7 @@ public:
     bool hasCycle(Node *head) {
         Node* slow = head;
         Node* fast = head;
-        while(fast != NULL && fast->next != nullptr){
+        while(fast != NULL && fast->next != nullptr){ //!Note: Logic is if loop then fast will never be null , so it has to be equals to slow at some poiny of time. otherwise it will exit from the loop 
             slow = slow->next;
             fast = fast->next->next;
             if(slow == fast){
