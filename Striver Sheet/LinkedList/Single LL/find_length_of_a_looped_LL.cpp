@@ -39,25 +39,68 @@ public:
 
     //-------------------------------------------------Brute Force Approach TC->O(N) -- SC->O(N) -------------------
     // Timer approach
+    // int loopLength(Node *head) {
+    //     std::unordered_map<Node*, int> hashedVal;
+    //     Node* temp = head;
+    //     int timer = 0;
+    //     while(temp != NULL){
+    //         if (hashedVal.find(temp) != hashedVal.end()) {
+    //             return timer - hashedVal[temp];
+    //         }
+    //         hashedVal[temp] = timer++;
+    //         temp = temp->next;
+    //     }
+    //     return 0;
+    // }
+
+    // ---------------------------------------------- MY Optimal Approach TC->O(N) -- SC->O(1)------------------------------
+    //*  Tortoise and Hare Algorithm (Floyd’s Cycle Detection).  //
+    // int loopLength(Node *head) {
+    //     Node* slow = head;
+    //     Node* fast = head;
+    //     while(fast != NULL && fast->next != NULL){
+    //         slow = slow->next;
+    //         fast = fast->next->next;
+    //         if(slow == fast){ //Collided
+    //             slow = head;
+    //             while(slow != fast){ // This will guranteed collide
+    //                 slow = slow->next; // Travel both the L1 distance
+    //                 fast = fast->next;
+    //             }
+    //             Node* detectedNode = slow;
+    //             int count = 1;
+    //             while(detectedNode->next != fast){ // here fast is also the detected node
+    //                 count++;
+    //                 detectedNode = detectedNode->next;
+    //             }
+    //             return count;
+    //         }
+    //     }
+    //     return 0;
+    // }
+
+    // ---------------------------------------------- MY Optimal Approach TC->O(N) -- SC->O(1)------------------------------
+    //*  Tortoise and Hare Algorithm (Floyd’s Cycle Detection).  //
     int loopLength(Node *head) {
-        std::unordered_map<Node*, int> hashedVal;
-        Node* temp = head;
-        int timer = 0;
-        while(temp != NULL){
-            if (hashedVal.find(temp) != hashedVal.end()) {
-                return timer - hashedVal[temp];
+        Node* slow = head;
+        Node* fast = head;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){ //Collided
+                // Easy way is to see of the collided point collide again at which count... //!Can be written in function
+                Node* meetingPoint = slow;
+                Node* temp = meetingPoint;
+                int count = 1;
+                while(temp->next != meetingPoint){
+                    temp = temp->next;
+                    count++;
+                }
+                return count;
             }
-            hashedVal[temp] = timer++;
-            temp = temp->next;
         }
         return 0;
     }
-
-    // ---------------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
-    //*  Tortoise and Hare Algorithm (Floyd’s Cycle Detection).  //
-    // Node* loopLength(Node *head) {
-
-    // }
 
     void printList(Node* head){
         // Node* temp = head;
