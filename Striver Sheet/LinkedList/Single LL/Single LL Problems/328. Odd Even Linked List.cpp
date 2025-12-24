@@ -18,36 +18,58 @@ struct Node{
 class Solution{
 public:
     //-------------------------------------------------Brute Force Approach TC->O(N) -- SC->O(Nlog) -------------------
-    Node* oddEvenList(Node *head) {
-        if (!head) return head;
-        std::queue<int> evenQ;
-        std::queue<int> oddQ;
-        Node* temp = head;
-        while(temp != NULL && temp->next != nullptr){
-            oddQ.push(temp->val);
-            evenQ.push(temp->next->val);
-            temp = temp->next->next;
-        }
-        // If odd length, push last odd node
-        if (temp != nullptr) {
-            oddQ.push(temp->val);
-        }
-        temp = head;
-        while(oddQ.size() != 0){
-            temp->val = oddQ.front(); oddQ.pop();
-            temp = temp->next;
-        }
-        while(evenQ.size() != 0){
-            temp->val = evenQ.front(); evenQ.pop();
-            temp = temp->next;
-        }
-        return head;
-    }
-
-    // ---------------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
     // Node* oddEvenList(Node *head) {
-
+    //     if (!head) return head;
+    //     std::queue<int> evenQ;
+    //     std::queue<int> oddQ;
+    //     Node* temp = head;
+    //     while(temp != NULL && temp->next != nullptr){
+    //         oddQ.push(temp->val);
+    //         evenQ.push(temp->next->val);
+    //         temp = temp->next->next;
+    //     }
+    //     // If odd length, push last odd node
+    //     if (temp != nullptr) {
+    //         oddQ.push(temp->val);
+    //     }
+    //     temp = head;
+    //     while(oddQ.size() != 0){
+    //         temp->val = oddQ.front(); oddQ.pop();
+    //         temp = temp->next;
+    //     }
+    //     while(evenQ.size() != 0){
+    //         temp->val = evenQ.front(); evenQ.pop();
+    //         temp = temp->next;
+    //     }
+    //     return head;
     // }
+
+    //! Note this was for the value not the position which differs from question ------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
+    // Node* oddEvenList(Node *head) {
+    //     Node* evenHead = new Node(-1), *evenTail = evenHead; 
+    //     Node* oddHead = new Node(-1), *oddTail = oddHead;
+    //     Node* curr = head, *temp;
+    //     while(curr != NULL){
+    //         temp = curr;
+    //         curr = curr->next;
+    //         temp->next = nullptr; // Ensure The node doesn’t accidentally keep old links, new list ends cleanly
+    //         // Append to odd list if value is odd
+    //         if(temp->val & 1){
+    //             oddTail->next = temp;             //---Connect the node
+    //             oddTail = temp;                   //---Move the tail
+    //         }else{ // Append to the even list
+    //             evenTail->next = temp;
+    //             evenTail = temp;
+    //         }
+    //     }
+    //     oddTail->next = evenHead->next;
+    //     return oddHead->next;
+    // }
+
+    //------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
+    Node* oddEvenList(Node *head) {
+
+    }
 
     void printList(Node* head){
         // Node* temp = head;
