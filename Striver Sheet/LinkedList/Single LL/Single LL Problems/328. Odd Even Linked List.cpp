@@ -68,6 +68,7 @@ public:
 
     //------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
     Node* oddEvenList(Node *head) {
+        if (!head || !head->next) return head;
         Node*temp = head;
         Node*even = head->next;
         Node*odd = head;
