@@ -68,7 +68,19 @@ public:
 
     //------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
     Node* oddEvenList(Node *head) {
+        Node*temp = head;
+        Node*even = head->next;
+        Node*odd = head;
+        Node* evenHead = even;
+        while(even != NULL && even->next != nullptr){
+            odd->next = even->next; // imagine they are on behind the other
+            odd = odd->next;
 
+            even->next = odd->next;
+            even = even->next;
+        }
+        odd->next = evenHead;
+        return head;
     }
 
     void printList(Node* head){
