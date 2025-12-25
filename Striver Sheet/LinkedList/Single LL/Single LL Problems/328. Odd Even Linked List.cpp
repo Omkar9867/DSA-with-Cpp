@@ -72,10 +72,10 @@ public:
         Node*temp = head;
         Node*even = head->next;
         Node*odd = head;
-        Node* evenHead = even;
+        Node* evenHead = even; // Why store evenHead ❓ ➡️ Because we’ll move the even pointer, but we need the start of even list later to attach it back.
         while(even != NULL && even->next != nullptr){
             odd->next = even->next; // imagine they are on behind the other
-            odd = odd->next;
+            odd = odd->next; // head now cannot see the even list because it was connected to odd and odd moved first. 
 
             even->next = odd->next;
             even = even->next;
