@@ -25,9 +25,60 @@ void qs(std::vector<int> &arr, int low, int high){
     }
 }
 
+// void sortColors(std::vector<int>& nums) {
+//     qs(nums, 0, nums.size()-1);
+// }
+
+// -----------------------------------------Brute Force Approach TC->O(N) ---SC->O(1) --------------------------------------
+// void sortColors(std::vector<int>& nums) {
+//     // Initialize count variables for 0s, 1s, and 2s
+//     int count0 = 0, count1 = 0, count2 = 0;
+
+//     // Count the frequency of 0s, 1s, and 2s in the array
+//     for(int i = 0; i < nums.size(); i++) {
+//         if(nums[i] == 0) count0++;
+//         else if(nums[i] == 1) count1++;
+//         else count2++;
+//     }
+
+//     // Overwrite the array with the counted values
+//     int index = 0;
+
+//     // Fill with 0s
+//     while(count0--) {
+//         nums[index++] = 0;
+//     }
+
+//     // Fill with 1s
+//     while(count1--) {
+//         nums[index++] = 1;
+//     }
+
+//     // Fill with 2s
+//     while(count2--) {
+//         nums[index++] = 2;
+//     }
+// }
+
+//!--------------------------------=============Dutch National Flag algorithm================-------------------------------
+//-------------------------------------------------Optimal Approach--------------------------------
 void sortColors(std::vector<int>& nums) {
-    qs(nums, 0, nums.size()-1);
+    int n = nums.size();
+    int low = 0, mid = 0, high = n-1;
+    while(mid <= high){
+        if(nums[mid] == 0){
+            std::swap(nums[mid], nums[low]);
+            mid++;
+            low++;
+        }else if(nums[mid] == 1){
+            mid++;
+        }else{
+            std::swap(nums[mid], nums[high]);
+            high--;
+        }
+    }  
 }
+// This is an iterative approach where mid will play with the numbers 0, 1 and 2 and assign according to the low , high and mid himself and iterate appropriately
 
 int main(){
     std::vector<int> arr = {2,0,2,1,1,0};
