@@ -12,25 +12,58 @@
 // }
 
 //------------------------------Kadane's Algorithm--TC->O(N)--SC->(1)------------------------
-int maxSubArray(std::vector<int>& nums){
+// int maxSubArray(std::vector<int>& nums){
+//     int maxSum = INT_MIN;
+//     int sum = 0;
+//     for(int i = 0; i < nums.size(); i++){
+//         sum += nums[i];
+//         if(sum > maxSum){
+//             maxSum = sum;
+//         }
+//         if(sum < 0){  //-------Main kadan's addon --(Is it better to start a new subarray here, or continue the previous one?)
+//             sum = 0;
+//         }
+//     }
+//     return maxSum;
+// }
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// =============================================================Extended============================================================
+// ---------------------------------------------------------------------------------------------------------------------------------
+
+//*Return subArray print
+std::vector<int> maxSubArray(std::vector<int>& nums){
     int maxSum = INT_MIN;
     int sum = 0;
-    for(int i = 0; i < nums.size(); i++){
-        sum += nums[i];
-        if(sum > maxSum){
-            maxSum = sum;
+    int tempStart = 0;
+    int bestStart = 0, bestEnd = 0;
+    for(int i = 0; i<nums.size(); i++){
+        if(nums[i] > sum + nums[i]){
+            sum = nums[i];
+            tempStart = i;
+        }else{
+            sum += nums[i];
         }
-        if(sum < 0){  //-------Main kadan's addon --(Is it better to start a new subarray here, or continue the previous one?)
-            sum = 0;
+        if(maxSum < sum){
+            maxSum = sum;
+            bestStart = tempStart;
+            bestEnd = i;
         }
     }
-    return maxSum;
+    return std::vector<int>(nums.begin() + bestStart, nums.begin() + bestEnd + 1);  //Key rule to remember (🔥 interview favorite) 
+                                                                                    //STL ranges are always [start, end) — end is NOT included
 }
+
+
 
 int main(){
     std::vector<int> arr = {-2,1,-3,4,-1,2,1,-5,4};
-    int result = maxSubArray(arr);
-    std::cout << "Result: " << result << std::endl;
+    // int result = maxSubArray(arr);
+    // std::cout << "Result: " << result << std::endl;
+    std::vector<int> result = maxSubArray(arr);
+    for(int i = 0; i<result.size(); i++){
+        std::cout << result[i] << " ";
+    }
 
     return 0;
 }
