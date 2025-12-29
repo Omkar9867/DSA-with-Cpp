@@ -5,10 +5,32 @@
 //!👎❌ No Brute Force
 
 //--------------------------------------------------Better Solution--TC->O()---SC->O()---------------------------
+//* ------------------But it's a STL approach which is only access in C++---------------------
 
-// void nextPermutation(std::vector<int>& nums) {
-    
-// }
+std::vector<int> nextPermutation(std::vector<int>& nums) {
+    // Store all permutations
+    std::vector<std::vector<int>> all; // in short array of array's
+
+    // Generate all permutations
+    std::sort(nums.begin(), nums.end());
+    do {
+        all.push_back(nums);
+    } while (next_permutation(nums.begin(), nums.end()));
+
+    // Traverse the list to find current permutation
+    for (int i = 0; i < all.size(); i++) {
+        if (all[i] == nums) {
+            // If it's the last permutation
+            if (i == all.size() - 1)
+                return all[0];
+            // Return the next one
+            return all[i + 1];
+        }
+    }
+
+    // Return original if not found (shouldn't happen)
+    return nums;
+}
 
 //--------------------------------------------------Optimal Solution--TC->O(N)---SC->O(1)---------------------------
 // 1. First iterate the arr from reverse order and look for the fall in a rising order and break and store the index
@@ -18,27 +40,27 @@
 // 4. return the arr which is the answer.  
 // 5. Edge case: if index is -1, reverse whole arr.
 
-void nextPermutation(std::vector<int>& nums) {
-    int n = nums.size();
-    int index = -1;
-    for(int i = n-2; i >= 0; i--){
-        if(nums[i] < nums[i + 1]){
-            index = i;
-            break;
-        }
-    }
-    if(index == -1){
-        std::reverse(nums.begin(), nums.end()); // Edge Case
-        return;
-    }
-    for(int i = n-1; i >= index; i--){
-        if(nums[i] > nums[index] ){
-            std::swap(nums[i], nums[index]);
-            break;
-        }
-    }
-    std::reverse(nums.begin() + index + 1, nums.begin() + n);
-}
+// void nextPermutation(std::vector<int>& nums) {
+//     int n = nums.size();
+//     int index = -1;
+//     for(int i = n-2; i >= 0; i--){
+//         if(nums[i] < nums[i + 1]){
+//             index = i;
+//             break;
+//         }
+//     }
+//     if(index == -1){
+//         std::reverse(nums.begin(), nums.end()); // Edge Case
+//         return;
+//     }
+//     for(int i = n-1; i >= index; i--){
+//         if(nums[i] > nums[index] ){
+//             std::swap(nums[i], nums[index]);
+//             break;
+//         }
+//     }
+//     std::reverse(nums.begin() + index + 1, nums.begin() + n);
+// }
 
 int main(){
     std::vector<int> arr = {1, 2, 3};
