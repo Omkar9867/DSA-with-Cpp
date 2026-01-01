@@ -31,7 +31,7 @@ int longestConsecutive(std::vector<int>& nums) {
     }
     // Traverse the set to find the longest sequence
     for(auto it : st){
-        if(st.find(it - 1) == st.end()){ // if the value sequence is not found. It is starting num of sequence
+        if(st.find(it - 1) == st.end()){ // if the value sequence is not found. It is starting num of sequence //* It also meant, if the previous value is found then the current val is not the start of the sequence
             int cnt = 1;
             int x = it; // Starting element of the sequence
             while(st.find(x+1) != st.end()){
