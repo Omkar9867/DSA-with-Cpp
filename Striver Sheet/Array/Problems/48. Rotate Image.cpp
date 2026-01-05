@@ -1,21 +1,38 @@
 #include <bits/stdc++.h>
 
 //--------------------------------Brute Force Approach--TC->O(N^2)--SC->O(N^2)--------------------------------
+// void rotate(std::vector<std::vector<int>>& matrix) {
+//     int n = matrix.size();
+
+//     //New matrix
+//     std::vector<std::vector<int>> rotatedMatrix(n, std::vector<int>(n));
+
+//     // Traverse each element of original matrix
+//     for (int i = 0; i < n; i++) {
+//         for (int j = 0; j < n; j++) {
+//             // Place the element at its new rotated position
+//             rotatedMatrix[j][n - i - 1] = matrix[i][j]; //?For every iteration the jth value in other arr-matrix, so the jth postion can be the jth matrix where the value lies
+//         }//!This is the algorithm to remember
+//     }
+
+//     matrix = rotatedMatrix;
+// }
+
+
+//--------------------------------Optimal Approach--TC->O(N^2)--SC->O(1)--------------------------------
+//* Approach : 1st Transpose the matrix, swap them diagonally, 2nd reverse each col. this will give you exact 90 degree rotation result 
 void rotate(std::vector<std::vector<int>>& matrix) {
     int n = matrix.size();
 
-    //New matrix
-    std::vector<std::vector<int>> rotatedMatrix(n, std::vector<int>(n));
-
-    // Traverse each element of original matrix
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            // Place the element at its new rotated position
-            rotatedMatrix[j][n - i - 1] = matrix[i][j]; //?For every iteration the jth value in other arr-matrix, so the jth postion can be the jth matrix where the value lies
-        }//!This is the algorithm to remember
+    for(int i = 0; i < n; i++){
+        for(int j = i + 1; j < n; j++){ // transpose technique
+            std::swap(matrix[i][j], matrix[j][i]);
+        }
     }
-
-    matrix = rotatedMatrix;
+    // reverse it
+    for(int i = 0; i < n; i++){
+        std::reverse(matrix[i].begin(), matrix[i].end());
+    }
 }
 
 int main(){
