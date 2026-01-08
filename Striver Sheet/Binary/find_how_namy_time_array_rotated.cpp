@@ -1,5 +1,8 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+
+// --------------------------Brute Force-TC->O(N)-------------------
+// Finding the smallest number and storing its index in the entire loop by *condition* and return the index 
+
 
 // ------------------------------------My Approach----------------------------------
 // int rotatedArrNum(std::vector<int>& nums){
