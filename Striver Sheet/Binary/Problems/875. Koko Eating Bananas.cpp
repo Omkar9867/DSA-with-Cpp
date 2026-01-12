@@ -1,11 +1,36 @@
 #include <bits/stdc++.h>
 
 // -------------------------------------Brute Force Approach--TC->O(N * max(a[]))--SC->O(1)-----------------------------------
-int calculateTotalHours(std::vector<int>& a, int hourly) {
-    int totalHours = 0;
+// int calculateTotalHours(std::vector<int>& a, int hourly) {
+//     int totalHours = 0;
+//     for (int pile : a) {
+//         // Add hours using ceil
+//         totalHours += (pile + hourly - 1) / hourly; //Formula: (a + b - 1) / b (using integer division).
+//     }
+//     return totalHours;
+// }
+// int minEatingSpeed(std::vector<int>& piles, int h) {
+//     // Find maximum pile size
+//     int maxVal = *std::max_element(piles.begin(), piles.end());
+
+//     // Try every possible speed i to the max pile
+//     for (int i = 1; i <= maxVal; i++) {
+//         int hours = calculateTotalHours(piles, i); // Meaning if i can eat all bananas in ith hour i.e. <= h 
+
+//         // If hours fit within h
+//         if (hours <= h) {
+//             return i;
+//         }
+//     }
+//     return maxVal;
+// }
+
+// -------------------------------------Optimal Approach--TC->O(Nlog(max(a[])))--SC->O(1)-----------------------------------
+long long calculateTotalHours(std::vector<int>& a, int hourly) {
+    long long totalHours = 0; // Note long long becasue of overflow
     for (int pile : a) {
         // Add hours using ceil
-        totalHours += (pile + hourly - 1) / hourly; //Formula: (a + b - 1) / b (using integer division).
+        totalHours += ((pile) + hourly - 1) / hourly; //Formula: (a + b - 1) / b (using integer division).
     }
     return totalHours;
 }
@@ -13,22 +38,29 @@ int minEatingSpeed(std::vector<int>& piles, int h) {
     // Find maximum pile size
     int maxVal = *std::max_element(piles.begin(), piles.end());
 
-    // Try every possible speed i to the max pile
-    for (int i = 1; i <= maxVal; i++) {
-        int hours = calculateTotalHours(piles, i); // Meaning if i can eat all bananas in ith hour i.e. <= h 
-
-        // If hours fit within h
+    // Instead trying every possibility take mid possiblity and since sorted we can use binary method
+    int st = 1, ed = maxVal;
+    int ans = maxVal;
+    while(st <= ed) {
+        int mid = st + (ed - st)/2;
+        long long hours = calculateTotalHours(piles, mid);
+        // here update the answer and try smaller speed
         if (hours <= h) {
-            return i;
+            ans = mid;
+            ed = mid - 1;
+        }else{
+            st = mid + 1;
         }
     }
-    return maxVal;
+    return ans;
 }
+//!An error in case appeared which was regarding how the ceil was calculated. when long long the below example resulted 3, 
+//! And by calculating the ciel making the pile double it resulted one. So if the value was not long long it gave error
 
 
 int main(){
-    std::vector<int> arr = {3,6,7,11};
-    int h = 8;
+    std::vector<int> arr = {805306368,805306368,805306368};
+    int h = 1000000000;
     int result = minEatingSpeed(arr, h);
     std::cout<< "Result: " << result << std::endl;
     return 0;
