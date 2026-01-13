@@ -24,8 +24,43 @@
 // }
 // my approach seems to have the adjacent and day logic missing
 // -------------------------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------Brute Force Approach--------------------------
-bool isPossible(std::vector<int>& bloomDays, int day, int m, int k){
+//-----------------------------Brute Force Approach-O(N^2)-------------------------
+// bool isPossible(std::vector<int>& bloomDays, int day, int m, int k){
+//     int count = 0; //No. of flowers collected
+//     int mNum = 0; //Store number of bouquets made
+//     for(int bloom : bloomDays){
+//         if(bloom <= day){ // since minimum to take
+//             count++;
+//             if(count == k){
+//                 mNum++;
+//                 count = 0;
+//             }
+//         }else{
+//             count = 0;
+//         }
+//     }
+//     return mNum >= m;
+// };
+
+// int minDays(std::vector<int>& bloomDay, int m, int k) {
+//     long long flowerNeed = 1LL* m* k; //No of flower needed for m number of bouquets
+//     int n = bloomDay.size();
+//     if(n < flowerNeed){
+//         return -1; // impossible to get the needed bouquets
+//     }
+//     int low = *std::min_element(bloomDay.begin(), bloomDay.end());
+//     int high = *std::max_element(bloomDay.begin(), bloomDay.end());
+//     for(int i = low; i<=high; i++){
+//         if(isPossible(bloomDay, i, m, k)){
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
+//! Above result time limit exceed
+
+//----------------------------------------Optimal Approach--TC->O(NlogN)----------------------
+int isPossible(std::vector<int>& bloomDays, int day, int m, int k){
     int count = 0; //No. of flowers collected
     int mNum = 0; //Store number of bouquets made
     for(int bloom : bloomDays){
@@ -39,7 +74,7 @@ bool isPossible(std::vector<int>& bloomDays, int day, int m, int k){
             count = 0;
         }
     }
-    return mNum >= m;
+    return mNum;
 };
 
 int minDays(std::vector<int>& bloomDay, int m, int k) {
@@ -50,20 +85,25 @@ int minDays(std::vector<int>& bloomDay, int m, int k) {
     }
     int low = *std::min_element(bloomDay.begin(), bloomDay.end());
     int high = *std::max_element(bloomDay.begin(), bloomDay.end());
-    for(int i = low; i<=high; i++){
-        if(isPossible(bloomDay, i, m, k)){
-            return i;
+    int ans = -1;
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        int possibleDays = isPossible(bloomDay, mid, m, k);
+        if(possibleDays >= m){
+            ans = mid;
+            high = mid - 1; 
+        }else {
+            low = mid + 1;
         }
     }
-    return -1;
+    return ans;
 }
-//! Above result time limit exceed
 
 
 int main(){
-    std::vector<int> arr = {7,7,7,7,12,7,7};
-    int m = 2;
-    int k = 3;
+    std::vector<int> arr = {1,10,3,10,2};
+    int m = 3;
+    int k = 1;
     int result = minDays(arr, m, k);
     std::cout<< "Result: " << result << std::endl;
     return 0;
