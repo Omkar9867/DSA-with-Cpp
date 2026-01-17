@@ -57,8 +57,6 @@ int shipWithinDays(std::vector<int>& weights, int days) {
     }
     return ans;
 }
-//!An error in case appeared which was regarding how the ceil was calculated. when long long the below example resulted 3, 
-//! And by calculating the ciel making the pile double it resulted one. So if the value was not long long it gave error
 
 
 int main(){
