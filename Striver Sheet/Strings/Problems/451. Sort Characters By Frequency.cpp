@@ -1,31 +1,56 @@
 #include <bits/stdc++.h>
 
-static bool comparator(std::pair<int, char> p1, std::pair<int, char> p2) {
-    if (p1.first > p2.first) return true;
-    if (p1.first < p2.first) return false;
-    return p1.second < p2.second;
-}
+// static bool comparator(std::pair<int, char> p1, std::pair<int, char> p2) {
+//     if (p1.first > p2.first) return true;
+//     if (p1.first < p2.first) return false;
+//     return p1.second < p2.second;
+// }
 
+// std::string frequencySort(std::string s) {
+//     // Array to store frequency and character
+//     std::pair<int, char> freq[26];
+//     // Initialize frequency array with character labels
+//     for (int i = 0; i < 26; i++) {
+//         freq[i] = {0, i + 'a'};
+//     }
+//     // Count frequency of each character in string
+//     for (char ch : s) {
+//         freq[ch - 'a'].first++; // basically top find the charater postion
+//     }
+//     // Sort the frequency array using the custom comparator
+//     sort(freq, freq + 26, comparator);
+
+//     // Store characters with non-zero frequency, meaning which is in the 's'
+//     std::string ans;
+//     for (int i = 0; i < 26; i++) {
+//         if (freq[i].first > 0) ans.push_back(freq[i].second);
+//     }
+
+//     // Return the result
+//     return ans;
+// }
+
+
+
+//----------------------------------------------------TC->O(n log n)---SC->O(n)--------------------------
 std::string frequencySort(std::string s) {
     // Array to store frequency and character
-    std::pair<int, char> freq[26];
-    // Initialize frequency array with character labels
-    for (int i = 0; i < 26; i++) {
-        freq[i] = {0, i + 'a'};
-    }
+    std::map<char, int> freq;
     // Count frequency of each character in string
-    for (char ch : s) {
-        freq[ch - 'a'].first++; // basically top find the charater postion
+    for (auto& ch : s) {
+        freq[ch]++;
     }
-    // Sort the frequency array using the custom comparator
-    sort(freq, freq + 26, comparator);
+    //Above : Sorted automatically in desc order based on int
 
-    // Store characters with non-zero frequency, meaning which is in the 's'
+    std::vector<std::pair<char,int>> vect(freq.begin(),freq.end()); // vector can be sorted using sort()
+
+    //Sort -> Important step using lambda
+    sort(vect.begin(),vect.end(),  [](auto &a,auto &b){return a.second>b.second}  );
+
     std::string ans;
-    for (int i = 0; i < 26; i++) {
-        if (freq[i].first > 0) ans.push_back(freq[i].second);
+    for(auto &it:vect){
+        ans.append(it.second,it.first); // ans.append(count, character); i.e (2, 'e')
     }
-
     // Return the result
     return ans;
 }
