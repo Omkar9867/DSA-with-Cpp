@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
-//-------------------------My-Approach------------------------
+//-------------------------My-Approach--TC->O(N)---SC->O(1)------------------------
 int romanToInt(std::string s) {
-    std::map<char, int> romanMap = {
+    std::unordered_map<char, int> romanMap = {
         {'I',1},
         {'V',5},
         {'X',10},
