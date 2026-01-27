@@ -49,29 +49,25 @@ public:
 
     //----------------------------Correct Approach-TC->O(N)------------------------
     Node* removeNthFromEnd(Node* head, int n) {
-        Node dummy(0);
-        dummy.next = head;
+        Node dummyNode(0);
+        dummyNode.next = head;
 
-        Node* fast = &dummy;
-        Node* slow = &dummy;
+        Node* fast = &dummyNode;
+        Node* slow = &dummyNode;
 
-        // Move fast n steps ahead
-        for (int i = 0; i < n; i++) {
+        //Fast forward our fast node to reach to nth position from start, so slow can skip the nth position from end
+        for(int i = 0; i<n; i++){
             fast = fast->next;
         }
 
-        // Move both until fast reaches the end
-        while (fast->next != nullptr) {
-            fast = fast->next;
+        while(fast->next != nullptr){ //Here fast will reach the end with exact n number to skip for slow
             slow = slow->next;
+            fast = fast->next;
         }
-
-        // Delete the target node
         Node* toDelete = slow->next;
         slow->next = toDelete->next;
-        delete toDelete;
-
-        return dummy.next;
+        delete(toDelete);
+        return dummyNode.next;
     }
 
 
