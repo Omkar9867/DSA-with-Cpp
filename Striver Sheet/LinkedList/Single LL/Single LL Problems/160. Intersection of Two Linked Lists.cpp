@@ -47,35 +47,57 @@ public:
     //     return NULL;
     // }
 
-    //-------------------------------------------------Optimal Approach TC->O(N) -- SC->O(1) --//*Hashing*-----------------
-    int getDifference(Node* head1, Node* head2) {
-        int len1 = 0, len2 = 0;
-        while (head1 != NULL || head2 != NULL) {
-            if (head1 != NULL) {
-                ++len1;
-                head1 = head1->next;
-            }
-            if (head2 != NULL) {
-                ++len2;
-                head2 = head2->next;
-            }
-        }
-        return len1 - len2;  // If negative, length of list2 > length of list1, else vice-versa
-    }
-    Node* getIntersectionNode(Node* headA, Node* headB){
-        int diff = getDifference(headA, headB);
+    //-------------------------------------------------Optimal Approach TC->O(N) -- SC->O(1) -------------------
+    // int getDifference(Node* head1, Node* head2) {
+    //     int len1 = 0, len2 = 0;
+    //     while (head1 != NULL || head2 != NULL) {
+    //         if (head1 != NULL) {
+    //             ++len1;
+    //             head1 = head1->next;
+    //         }
+    //         if (head2 != NULL) {
+    //             ++len2;
+    //             head2 = head2->next;
+    //         }
+    //     }
+    //     return len1 - len2;  // If negative, length of list2 > length of list1, else vice-versa
+    // }
+    // Node* getIntersectionNode(Node* headA, Node* headB){
+    //     int diff = getDifference(headA, headB);
     
-        if (diff < 0) 
-            while (diff++ != 0) headB = headB->next;
-        else 
-            while (diff-- != 0) headA = headA->next;
+    //     if (diff < 0) 
+    //         while (diff++ != 0) headB = headB->next;
+    //     else 
+    //         while (diff-- != 0) headA = headA->next;
 
-        while(headA != nullptr){
-            if (headA == headB) return headA;  // Intersection point found
-            headB = headB->next;
-            headA = headA->next;
+    //     while(headA != nullptr){
+    //         if (headA == headB) return headA;  // Intersection point found
+    //         headB = headB->next;
+    //         headA = headA->next;
+    //     }
+    //     return NULL;
+    // }
+
+
+    //-------------------------------------------------Optimal Approach TC->O(N) -- SC->O(1) -------------------
+    //* Take two dummy nodes for each list. Point each to the head of the lists.
+    //* Iterate over them. If anyone becomes null, point them to the head of the opposite lists and continue iterating until they collide.
+
+    Node* getIntersectionNode(Node* headA, Node* headB){
+        Node* d1 = headA;
+        Node* d2 = headB;
+
+        while(d1 != d2){
+            if (d1 == nullptr){
+                d1 = headB;
+            }else if(d2 == nullptr){
+                d2 = headA;
+            }else{
+                d1 = d1->next;
+                d2 = d2->next;
+            }
         }
-        return NULL;
+        return d2;
     }
 
     void printList(Node* head){
