@@ -1,30 +1,54 @@
 #include <bits/stdc++.h>
 
-const int MOD = 1e9 + 7;
+// const int MOD = 1e9 + 7;
 
-int countRecursive(int idx, long long n){
-    if(idx == n) return 1; // Base case
-    int result = 0;
-    if(idx % n == 0){
-        //Even Case : even digits
-        for(int digit: {0, 2, 4, 6, 8}){
-            result += countRecursive(idx + 1, n) % MOD;
-        }
-    }else{
-        //Even Case : even digits
-        for(int digit: {1, 3, 5, 7, 9}){
-            result += countRecursive(idx + 1, n) % MOD;
-        }
+// int countRecursive(int idx, long long n){
+//     if(idx == n) return 1; // Base case
+//     int result = 0;
+//     if(idx % n == 0){
+//         //Even Case : even digits
+//         for(int digit: {0, 2, 4, 6, 8}){
+//             result += countRecursive(idx + 1, n) % MOD;
+//         }
+//     }else{
+//         //Odd Case : valid digits
+//         for(int digit: {2, 3, 5, 7}){
+//             result += countRecursive(idx + 1, n) % MOD;
+//         }
+//     }
+//     return result;
+// }
+
+// int countGoodNumbers(long long n){
+//     int index = 0;
+//     return countRecursive(index, n);
+// }
+
+//!understand properly ----- Above will Time Limit Exceeded issue for large numbers 
+
+const long long MOD = 1e9 + 7;
+long long power(long long base, long long exp) {
+    long long res = 1;
+    base %= MOD;
+    while(exp > 0){
+        if (exp % 2 == 1) res = (res * base) % MOD;
+        base = (base * base) % MOD;
+        exp /= 2;
     }
-    return result;
+    return res;
 }
 
 int countGoodNumbers(long long n){
-    int index = 0;
-    return countRecursive(index, n);
+    int odd = n/2;
+    int even = n - odd;
+    // For total good numbers
+    return (power(5, even) * power(4, odd)) % MOD;  // {0, 2, 4, 6, 8} even has 5 length // odd has 4 {2, 3, 5, 7}
 }
 
-//!understand properly ----- Above will Time Limit Exceeded issue for large numbers
+// Number of odd positions = (n/2)
+// Number of even positions = (n/2 = n- n/2)
+
+// Total Good Numbers = (5^{ n/2 } X 4^{ n/2 } (mod 10^{9}+7)).
 
 
 int main(){
