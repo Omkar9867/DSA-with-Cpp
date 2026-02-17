@@ -40,6 +40,12 @@ int main(){
     return 0;
 }
 
+//             ""
+//          /       \
+//        "0"        "1"
+//       /   \       /
+//    "00"  "01"   "10"
+
 // Generate all binary strings
 
 // Problem Statement: Given an integer n, return all binary strings of length n that do not contain consecutive 1s.
