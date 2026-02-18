@@ -56,6 +56,22 @@ std::vector<std::string> generateParenthesis(int n) {
 // If close < open, add ')' and recurse.
 // If curr.length == 2 * n, add it to the result.
 
+
+//* 🌳 RECURSION TREE (VISUAL)
+//=================================================
+
+// "" 
+//  └── "("
+//       ├── "(("
+//       │     └── "(()"
+//       │           └── "(())"  ✅
+//       │
+//       └── "()"
+//             └── "()("
+//                   └── "()()"  ✅
+
+//=================================================
+
 int main(){
     int n = 3;
     std::vector<std::string> result = generateParenthesis(n);
