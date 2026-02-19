@@ -75,7 +75,7 @@ If both corresponding bits are 1, the resulting bit is 1; otherwise, it is 0.
 ```
 13: 1101
  7: 0111
-&  : 0101 → 5
+& : 0101 → 5
 ```
 
 ### OR Operator (|)
@@ -84,7 +84,7 @@ If either corresponding bit is 1, the resulting bit is 1.
 ```
 13: 1101
  7: 0111
-|  : 1111 → 15
+| : 1111 → 15
 ```
 
 ### XOR Operator (^)
@@ -93,7 +93,7 @@ If bits differ, the result is 1; if the same, result is 0.
 ```
 13: 1101
  7: 0111
-^  : 1010 → 10
+^ : 1010 → 10
 ```
 
 ### NOT Operator (~)
@@ -149,3 +149,5 @@ Shifts bits to the left, fills right with 0s.
    ```
    num ^ (1 << i)
    ```
+Reference: 
+https://www.youtube.com/watch?v=qQd-ViW7bfk
