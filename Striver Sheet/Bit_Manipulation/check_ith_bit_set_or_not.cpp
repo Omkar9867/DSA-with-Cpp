@@ -4,16 +4,29 @@
 // Time Complexity: O(log n), due to integer-to-binary conversion and indexing.
 // Space Complexity: O(log n), for the binary string.
 
+// bool checkIthBit(int n, int i){
+//     std::string binaryForm = "";
+
+//     while(n > 0){
+//         binaryForm += (n % 2 == 0 ? '0' : '1');
+//         n /= 2;
+//     }
+//     if( i >= binaryForm.length()) return false;
+
+//     return binaryForm[i] == '1';
+// }
+
+// -----------------------------------Optimal Approach-----------------------
+
+// Use bit masking to isolate the i-th bit in the binary representation of the number.
+// By shifting 1 to the left i times, you create a mask where only the i-th bit is set.
+// Perform a bitwise AND between the number and the mask to check if that specific bit is active.
+// If the result is non-zero, the i-th bit is set to 1; otherwise, it is 0.
+
+//Todo: Understand thoroughly
 bool checkIthBit(int n, int i){
-    std::string binaryForm = "";
-
-    while(n > 0){
-        binaryForm += (n % 2 == 0 ? '0' : '1');
-        n /= 2;
-    }
-    if( i >= binaryForm.length()) return false;
-
-    return binaryForm[i] == '1';
+    // Check if the i-th bit is set using bitwise AND operation
+    return (n & (1 << i)) != 0; // If the ith bit is 1, the result will be non-zero 
 }
 
 int main(){
