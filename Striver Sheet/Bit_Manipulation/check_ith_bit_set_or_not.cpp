@@ -16,7 +16,7 @@
 //     return binaryForm[i] == '1';
 // }
 
-// -----------------------------------Optimal Approach-----------------------
+// -----------------------------------Optimal Approach--TC->O(1)--SC->O(1)-----------------------
 
 // Use bit masking to isolate the i-th bit in the binary representation of the number.
 // By shifting 1 to the left i times, you create a mask where only the i-th bit is set.
