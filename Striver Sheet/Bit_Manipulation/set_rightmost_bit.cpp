@@ -26,7 +26,7 @@ int setRightmostBit(int n){
     return num;
 }
 
-// -----------------------------------Optimal Approach -------------------------
+// -----------------------------------Optimal Approach TC->O(1)-------------------------
 // Use bitwise OR with n + 1:
 // result = n | (n + 1)
 // n + 1 flips the rightmost 0 in n to 1, and all bits to the right become 0.
