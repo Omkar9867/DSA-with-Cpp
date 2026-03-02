@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-// ----------------------------------Brute Force Approach ----------------------------
+// ----------------------------------Approach TC->O(1)-->loops thorugh tht fixed no.----------------------------
 // To find how many bits differ between two numbers, compare them bit by bit.
 // XOR highlights the positions where the two numbers have different bits.
 // Each set bit in the XOR result represents a required flip to match the numbers.
