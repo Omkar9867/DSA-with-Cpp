@@ -33,9 +33,8 @@ std::vector<int> singleNumber(std::vector<int>& nums) {
     int rightmost = XOR & (XOR - 1) ^ XOR;
     int XOR1 = 0, XOR2 = 0;
     for(int i=0; i < n; i++) {
-        /* Divide the numbers among bucket 1
-        and 2 based on rightmost set bit */
-        if(nums[i] & rightmost) {
+        /* Divide the numbers among bucket 1 and 2 based on rightmost set bit */
+        if(nums[i] & rightmost) { // All the duplicate numbers will go to same bucket amd later will be canceled out using "^"
             XOR1 = XOR1 ^ nums[i];
         }
         else {
