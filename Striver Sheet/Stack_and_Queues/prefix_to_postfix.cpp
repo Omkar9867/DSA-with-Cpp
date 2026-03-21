@@ -4,44 +4,45 @@
 
 std::string postfixToInfix(std::string s){
     std::stack<std::string> st;
-    int i = 0;
-    while(i < s.size()){
+    int i = s.size();
+    while(i >= 0){ // here we move reverse
         if(isalnum(s[i])){
             st.push(std::string(1, s[i]));
         }else{
             std::string t1 = st.top() ; st.pop();
             std::string t2 = st.top() ; st.pop();
-            std::string conv = '(' + t2 + s[i] + t1 + ')'; //-> during addition might take time: O(N1 + N2)
+            std::string conv = t1 + t2 + s[i]; //-> during addition might take time: O(N1 + N2)
             st.push(conv);
         }
-        i++;
+        i--;
     }
     return st.top();
 }
 
 
 int main(){
-    std::string s = "ab+c*";
+    std::string s = "*+ab-cd";
     std::string result = postfixToInfix(s);
     std::cout << "Result: " << result << std::endl;
     return 0;
 }
 
-// Postfix to Infix
+// Prefix to Postfix Conversion
 
-// Problem Statement: Given a postfix expression (a string), convert it into an equivalent infix expression. The postfix expression is evaluated from left to right. The infix expression should have the proper parentheses to ensure correct operator precedence.
+// Problem Statement: You are given a valid prefix expression consisting of binary operators and single-character operands. Your task is to convert it into a valid postfix expression.
 
-// Write a function to perform this conversion.
+// Prefix (Polish) notation places the operator before operands.
+// Postfix (Reverse Polish) notation places the operator after operands.
 
 // Examples
 // Example 1:
 // Input:
-//  "ab+c*"
+//  expression = "+ab
 // Output:
-//  "(a+b)*c"
+//  ab+
 
 // Example 2:
 // Input:
-//  "ab*cd/+"
+//  expression = "*+ab-cd
 // Output:
-//  "(a*b)+(c/d)"
+//  ab+cd-*

@@ -1,0 +1,8 @@
+2️⃣ Quick Cheat Sheet:
+n (input size)	            Allowed complexity
+n ≤ 10	                    Anything (even n!)
+n ≤ 20	                    2ⁿ (bitmask / brute force)
+n ≤ 100	                    n³
+n ≤ 1,000	                n²
+n ≤ 100,000 (10⁵)	        n log n
+n ≤ 1,000,000 (10⁶)	        n
