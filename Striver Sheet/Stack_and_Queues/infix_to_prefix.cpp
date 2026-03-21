@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-//------------------------------------------Approach-TC->O(N)+O(N)---SC->O(N)+O(N)-----------------------------------
+//------------------------------------------Approach-TC->O(3N)---SC->O(N)-----------------------------------
 
 int priority(char optr){
     switch (optr){
@@ -18,7 +18,7 @@ int priority(char optr){
 }
 
 std::string prefixToInfix(std::string s){
-    std::reverse(s.begin(), s.end());
+    std::reverse(s.begin(), s.end()); //->O(N)
     std::stack<char> st;
     std::string ans;
     int i = 0;
@@ -37,9 +37,16 @@ std::string prefixToInfix(std::string s){
             }
             st.pop(); //* pop the opening bracket also;
         }else{
-            while(!st.empty() && (priority(s[i]) < priority(st.top()))){ //* Enhance condition where it should be only small not even equal
-                ans += st.top();
-                st.pop();
+            if(s[i] == '^'){ //*Controlled conversion 
+                while(!st.empty() && (priority(s[i]) <= priority(st.top()))){
+                    ans += st.top();
+                    st.pop();
+                }
+            }else{
+                while(!st.empty() && (priority(s[i]) < priority(st.top()))){
+                    ans += st.top();
+                    st.pop();
+                }
             }
             st.push(s[i]);
         }
