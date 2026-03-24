@@ -3,7 +3,7 @@
 //----------Bruteforce->to loop j inside i and coditionally replace number
 
 
-//--------------------------------Approach-------------------------
+//--------------------------------Approach--TC->O(2N)--SC->O(N)-----------------------
 std::vector<int> nextGreaterElement(std::vector<int>& nums1, std::vector<int>& nums2) {
     std::unordered_map<int,int>store; //value nextGreater
     std::stack<int> st;
