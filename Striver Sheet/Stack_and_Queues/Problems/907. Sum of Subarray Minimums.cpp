@@ -39,7 +39,7 @@ std::vector<int> findNSE(std::vector<int> &arr) {
 }
 
 /* previous smaller or equal elements */
-std::vector<int> findPSEE(std::vector<int> &arr) { //! Remember why previous small and "equal" elem. 
+std::vector<int> findPSEE(std::vector<int> &arr) { //! Remember why previous small and "equal" elem. if arr = [1, 1]
     int n = arr.size();
     std::vector<int> ans(n);
     
