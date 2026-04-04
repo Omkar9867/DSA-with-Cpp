@@ -63,17 +63,45 @@ std::vector<int> findPSEE(std::vector<int> &arr) {
     }
     return ans;
 }
-int largestRectangleArea(std::vector<int>& heights) {
-    std::vector<int> nse = findNSE(heights);
+// int largestRectangleArea(std::vector<int>& heights) {
+//     std::vector<int> nse = findNSE(heights);
         
-    std::vector<int> psee = findPSEE(heights);
-    int maxArea = INT_MIN;
-    for(int i = 0; i < heights.size(); i++){
-        int width = nse[i] - psee[i] + 1;
-        int maxVal = heights[i] * width;
-        maxArea = std::max(maxArea, maxVal);
+//     std::vector<int> psee = findPSEE(heights);
+//     int maxArea = INT_MIN;
+//     for(int i = 0; i < heights.size(); i++){
+//         int width = nse[i] - psee[i] + 1;
+//         int maxVal = heights[i] * width;
+//         maxArea = std::max(maxArea, maxVal);
+//     }
+//     return maxArea;
+// }
+
+// ---------------------------------------Optimal Approach-2--TC->O(N)-------------------------------------
+int largestRectangleArea(std::vector<int>& heights) {
+    std::stack<int> st; // store indices
+    int maxA = 0;
+    int n = heights.size();
+
+    // Loop through each bar including an imaginary bar at the end
+    for (int i = 0; i <= n; i++) {
+        // While current bar is smaller than the top of the stack or we reached the end i.e. pge
+        while (!st.empty() && (i == n || heights[st.top()] >= heights[i])) {
+            int height = heights[st.top()];
+            st.pop(); // Remove that bar
+
+            int width;
+            if (st.empty()) {
+                width = i; // the current bar
+            } else {
+                width = i - st.top() - 1; // Width between current index and index at top of stack
+            }
+            
+            maxA = std::max(maxA, width * height);
+        }
+        // Push current index into stack
+        st.push(i);
     }
-    return maxArea;
+    return maxA;
 }
 
 int main(){
