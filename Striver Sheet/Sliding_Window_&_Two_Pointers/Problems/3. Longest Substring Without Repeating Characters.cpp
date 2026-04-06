@@ -1,31 +1,64 @@
 #include <bits/stdc++.h>
 
 //----------------------------------Brute Force Approach--TC->O(N^2)---------------------------
-int lengthOfLongestSubstring(std::string s) {
-    int n = s.size(); 
-    int maxLen = 0;    
+// int lengthOfLongestSubstring(std::string s) {
+    //     int n = s.size(); 
+    //     int maxLen = 0;    
     
-    for (int i = 0; i < n; i++) {
+    //     for (int i = 0; i < n; i++) {
         
-        // Hash to track characters in the current substring window
-        // Assuming extended ASCII characters
-        std::vector<int> hash(256, 0);  
+//         // Hash to track characters in the current substring window
+//         // Assuming extended ASCII characters
+//         std::vector<int> hash(256, 0);  
         
-        for (int j = i; j < n; j++) {
-            
-            /* If s[j] is already in the current substring window*/
-            if (hash[s[j]] == 1) break;  
-            
-            /* Update the hash to mark s[j] as present in the current window*/
-            hash[s[j]] = 1;
-            
-            /* Calculate the length of the current substring*/
-            int len = j - i + 1;
-            
-            maxLen = std::max(maxLen, len);
-        }
+//         for (int j = i; j < n; j++) {
+    
+//             /* If s[j] is already in the current substring window*/
+//             if (hash[s[j]] == 1) break;  
+
+//             /* Update the hash to mark s[j] as present in the current window*/
+//             hash[s[j]] = 1;
+
+//             /* Calculate the length of the current substring*/
+//             int len = j - i + 1;
+
+//             maxLen = std::max(maxLen, len);
+//         }
+//     }
+//     return maxLen; 
+// }
+
+//----------------------------------Optimal Approach--TC->O(N)--SC->O(N)---------------------------
+int lengthOfLongestSubstring(std::string s) {
+    int n = s.size();
+
+    int HashLen = 256; 
+    int hash[HashLen]; 
+    
+    // Initialize hash table with -1 (indicating no occurrence)
+    for (int i = 0; i < HashLen; ++i) {
+        hash[i] = -1;
     }
-    return maxLen; 
+
+    int l = 0, r = 0, maxLen = 0;
+    while (r < n) { // Move right pointer to next position
+
+        /* If current character s[r] is already in the substring*/
+        if (hash[s[r]] != -1) {
+            // Move left pointer to the right of the last occurrence of s[r]
+            l = std::max(hash[s[r]] + 1, l);
+        }
+        int len = r - l + 1;
+        
+        // Update maximum length found so far
+        maxLen = std::max(len, maxLen);
+        
+        // Store the index of the current character in the hash table
+        hash[s[r]] = r;
+
+        r++;
+    }
+    return maxLen;
 }
 
 int main(){
