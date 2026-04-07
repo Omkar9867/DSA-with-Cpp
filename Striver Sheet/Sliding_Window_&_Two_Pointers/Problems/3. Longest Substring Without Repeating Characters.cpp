@@ -62,6 +62,10 @@ int lengthOfLongestSubstring(std::string s) {
 }
 
 int main(){
+    std::string s = "abcabcbb";
+    int result = lengthOfLongestSubstring(s);
+
+    std::cout << "Result: " << result << std::endl;
 
     return 0;
 }
