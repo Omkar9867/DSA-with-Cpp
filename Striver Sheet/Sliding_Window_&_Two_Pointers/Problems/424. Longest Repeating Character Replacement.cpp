@@ -1,49 +1,75 @@
 #include <bits/stdc++.h>
 
 //----------------------------------Brute Force Approach--TC->O(N^2)---------------------------
-int characterReplacement(std::string& s, int k) {
-    int maxLength = 0;
-    
-    for (int i = 0; i < s.length(); i++) {
-        
-        std::vector<int> freq(26, 0);
-        
-        // Track max frequency character in the current substring
-        int maxFreq = 0;
-        
-        for (int j = i; j < s.length(); j++) {
-            
-            freq[s[j] - 'A']++;
-            
-            maxFreq = std::max(maxFreq, freq[s[j] - 'A']);
-            
-            // Calculate total length of current substring
-            int windowLength = j - i + 1;
-            
-            int replace = windowLength - maxFreq;
-            
-            if (replace <= k) {
-                maxLength = std::max(maxLength, windowLength);
-            }
-        }
-    }
-    
-    return maxLength;
-}
-
-//----------------------------------Optimal Approach--TC->O(N)--SC->O(N)---------------------------
 // int characterReplacement(std::string& s, int k) {
-
+//     int maxLength = 0;
+    
+//     for (int i = 0; i < s.length(); i++) {
+        
+//         std::vector<int> freq(26, 0);
+        
+//         // Track max frequency character in the current substring
+//         int maxFreq = 0;
+        
+//         for (int j = i; j < s.length(); j++) {
+            
+//             freq[s[j] - 'A']++;
+            
+//             maxFreq = std::max(maxFreq, freq[s[j] - 'A']);
+            
+//             // Calculate total length of current substring
+//             int windowLength = j - i + 1;
+            
+//             int replace = windowLength - maxFreq; // We subtract to see the difference of the different char and 
+            
+//             if (replace <= k) {
+//                 maxLength = std::max(maxLength, windowLength);
+//             }
+//         }
+//     }
+    
+//     return maxLength;
 // }
 
-//----------------------------------Optimal Approach2--TC->O(N)--SC->O(N)---------------------------
+//----------------------------------Optimal Approach--TC->O(N)--SC->O(1)---------------------------
 int characterReplacement(std::string& s, int k) {
-    
+    std::vector<int> freq(26, 0);
+    int l = 0, maxFreq = 0, maxLen = 0;
+    for (int r = 0; r < s.size(); r++) {
+        freq[s[r] - 'A']++;
+        maxFreq = std::max(maxFreq, freq[s[r] - 'A']);
+
+        while(((r - l + 1) - maxFreq) > k) {
+            freq[s[l] - 'A']--;
+            l++;
+        }
+
+        maxLen = std::max(maxLen, r - l + 1);
+    }
+    return maxLen;
 }
 
+//----------------------------------Optimal Approach2--TC->O(N)--SC->O(1)---------------------------
+// int characterReplacement(std::string& s, int k) {
+    // std::vector<int> freq(26, 0);
+    // int l = 0, maxFreq = 0, maxLen = 0;
+    // for (int r = 0; r < s.size(); r++) {
+    //     freq[s[r] - 'A']++;
+    //     maxFreq = std::max(maxFreq, freq[s[r] - 'A']);
+
+    //     if (((r - l + 1) - maxFreq) > k) {
+    //         freq[s[l] - 'A']--;
+    //         l++;
+    //     }
+
+    //     maxLen = std::max(maxLen, r - l + 1);
+    // }
+    // return maxLen;
+// }
+
 int main(){
-    std::string s = "ABAB";
-    int k = 3;
+    std::string s = "AABABBA";
+    int k = 1;
     int result = characterReplacement(s, k);
 
     std::cout << "Result: " << result << std::endl;
