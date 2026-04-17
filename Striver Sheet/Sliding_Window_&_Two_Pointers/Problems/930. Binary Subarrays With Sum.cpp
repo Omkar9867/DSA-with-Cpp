@@ -16,37 +16,64 @@
 //     return maxCount;
 // }
 
-//----------------------------------Optimal Approach--TC->O(2N)--SC->O(1)-Const '2' space--------------------------
-int numSubarraysWithSum(std::vector<int>& nums, int goal) {
-    // Hashmap to store prefix sum frequencies
-    std::unordered_map<int, int> prefixSumCount;
+//----------------------------------Better Approach--TC->O(N)--SC->O(n)--------------------------
+// int numSubarraysWithSum(std::vector<int>& nums, int goal) {
+//     // Hashmap to store prefix sum frequencies
+//     std::unordered_map<int, int> prefixSumCount;
 
-    int count = 0, sum = 0;
+//     int count = 0, sum = 0;
 
-    // Add base case: prefix sum 0 has frequency 1
-    prefixSumCount[0] = 1;
+//     // Add base case: prefix sum 0 has frequency 1
+//     prefixSumCount[0] = 1;
 
-    // Iterate through the array
-    for (int num : nums) {
-        // Add current element to prefix sum
-        sum += num;
+//     // Iterate through the array
+//     for (int num : nums) {
+//         // Add current element to prefix sum
+//         sum += num;
 
-        // If (sum - goal) exists in map, add its frequency to count
-        if (prefixSumCount.find(sum - goal) != prefixSumCount.end()) {
-            count += prefixSumCount[sum - goal];
+//         // If (sum - goal) exists in map, add its frequency to count
+//         if (prefixSumCount.find(sum - goal) != prefixSumCount.end()) {
+//             count += prefixSumCount[sum - goal];
+//         }
+
+//         prefixSumCount[sum]++;
+//     }
+
+//     // Return total count of valid subarrays
+//     return count;
+// }
+
+//----------------------------------Optimal Approach--TC->2(N)--SC->O(1)---------------------------
+//!Understand welll Todo
+int atMost(std::vector<int>& nums, int k) {
+    // If k is negative, no such subarrays exist
+    if (k < 0) return 0;
+
+    int left = 0;
+    int sum = 0;
+    int count = 0;
+
+    // Traverse the array using right pointer
+    for (int right = 0; right < nums.size(); right++) {
+        // Add current element to sum
+        sum += nums[right];
+
+        // Shrink the window from the left if sum exceeds k
+        while (sum > k) {
+            sum -= nums[left];
+            left++;
         }
 
-        prefixSumCount[sum]++;
+        // Add the number of valid subarrays ending at right
+        count += (right - left + 1);
     }
 
-    // Return total count of valid subarrays
     return count;
 }
-
-//----------------------------------Optimal Approach2--TC->O(N)--SC->O(1)---------------------------
-// int numSubarraysWithSum(std::vector<int>& nums, int goal) {
-
-// }
+int numSubarraysWithSum(std::vector<int>& nums, int goal) {
+    // Return difference between subarrays with sum at most goal and at most (goal - 1)
+    return atMost(nums, goal) - atMost(nums, goal - 1);
+}
 
 int main(){
     std::vector<int> nums = {0,0,0,0,0};
