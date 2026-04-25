@@ -23,9 +23,29 @@ int numberOfSubstrings(std::string s) {
 }
 
 //----------------------------------Optimal Approach--TC->2(N)--SC->O(1)---------------------------
-// int numberOfSubstrings(std::vector<int>& nums) {
+// !Understand properly
+int numberOfSubstrings(std::string s) {
+    // Initialize frequency map for 'a', 'b', and 'c'
+    std::vector<int> freq(3, 0);
 
-// }
+    int result = 0;
+
+    int left = 0;
+
+    for (int right = 0; right < s.length(); right++) {
+        freq[s[right] - 'a']++;
+
+        while (freq[0] > 0 && freq[1] > 0 && freq[2] > 0) {
+            result += (s.length() - right);
+
+            // Decrease frequency of character at left and move left forward
+            freq[s[left] - 'a']--;
+            left++;
+        }
+    }
+
+    return result;
+}
 
 int main(){
     std::string s = "";
