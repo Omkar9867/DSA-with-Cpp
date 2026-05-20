@@ -8,21 +8,52 @@ public:
     //     return nums;
     // }
 
-//--------------------Better Approach------------------------
-    void heapify(std::vector<int>& nums, int n, int i) {
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
+//--------------------Better Approach--TC->O(N)--SC->O(logN)----------------------
+    // void heapify(std::vector<int>& nums, int n, int i) {
+    //     int largest = i;
+    //     int left = 2 * i + 1;
+    //     int right = 2 * i + 2;
 
-        if (left < n && nums[left] > nums[largest])
-            largest = left;
+    //     if (left < n && nums[left] > nums[largest])
+    //         largest = left;
 
-        if (right < n && nums[right] > nums[largest])
-            largest = right;
+    //     if (right < n && nums[right] > nums[largest])
+    //         largest = right;
 
-        if (largest != i) {
+    //     if (largest != i) {
+    //         std::swap(nums[i], nums[largest]);
+    //         heapify(nums, n, largest);
+    //     }
+    // }
+    // std::vector<int> minToMaxHeap(std::vector<int> nums) {
+    //     int n = nums.size();
+
+    //     // Build Max Heap
+    //     for (int i = n / 2 - 1; i >= 0; i--) {
+    //         heapify(nums, n, i);
+    //     }
+
+    //     return nums;
+    // }
+
+//-----------------------------------Optimal Approach --TC->O(N)--SC->O(1)--------------
+    void heapify(std::vector<int>& nums, int n, int i) { // Non recursive
+        while (true) {
+            int largest = i;
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+
+            if (left < n && nums[left] > nums[largest])
+                largest = left;
+
+            if (right < n && nums[right] > nums[largest])
+                largest = right;
+
+            if (largest == i)
+                break;
+
             std::swap(nums[i], nums[largest]);
-            heapify(nums, n, largest);
+            i = largest;
         }
     }
     std::vector<int> minToMaxHeap(std::vector<int> nums) {
@@ -42,6 +73,10 @@ int main() {
     std::vector<int> nums = {10, 20, 30, 21, 23};
 
     // Output result
+    std::vector<int> result = obj.minToMaxHeap(nums);
+    for(int i = 0; i<result.size(); i++){
+        std::cout << result[i] << " " << std::endl;
+    }
 
     return 0;
 }
