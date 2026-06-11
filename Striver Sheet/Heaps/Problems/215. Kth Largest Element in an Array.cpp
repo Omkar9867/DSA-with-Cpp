@@ -22,7 +22,7 @@ class Solution {
     //     return pq.top();
     // }
 
-    //-------------------------------Optimal Force---TC->O(N)
+    //-------------------------------Optimal Force---TC->O(N)--------------Quick-Select-----
     //* Assuming the array gets divided into two equal parts, with every partitioning step, the search range is reduced by half. Thus, the time complexity is O(N + N/2 + N/4 + ... + 1) = O(N).
 
     //* In the worst-case scenario (when the element at the left or right index is chosen as the pivot):
