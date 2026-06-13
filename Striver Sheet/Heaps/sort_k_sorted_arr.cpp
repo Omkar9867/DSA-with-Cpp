@@ -10,6 +10,10 @@ public:
 
 //---------------------------Optimal Approach--TC->O(NlogK)---------------------------------
 //!understand well
+// First push into min heap upto k+1 elem, because the smallest must lie somewhere in that section {arr[0 ... k]}
+// Then make an empty result, to pop the smallest i.e. top form the minheap
+// During this process , empty the remaining vector arr also by pushing inside the (min-heap) so sorting is correct 
+// Make sure in the edge case to empty the remaining heap 
     std::vector<int> sortNearlySortedArray(std::vector<int>& arr, int k) {
         // Create a min heap using priority_queue with greater comparator
         std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
