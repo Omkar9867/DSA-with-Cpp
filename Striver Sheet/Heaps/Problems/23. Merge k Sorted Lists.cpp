@@ -26,32 +26,69 @@ ListNode* makeList(std::initializer_list<int> vals) {
     return dummy.next;
 }
 
+class Compare {
+public:
+    // Comparator to order ListNode pointers based on node values
+    bool operator()(ListNode* a, ListNode* b) {
+        return a->val > b->val;
+    }
+};
+
 class Solution {
 public:
 //--------------------------------Brute Force--TC->O(NlogN)----------------------------
-    ListNode* mergeKLists(std::vector<ListNode*>& lists) {
-        std::vector<int> allValues;
+    // ListNode* mergeKLists(std::vector<ListNode*>& lists) {
+    //     std::vector<int> allValues;
 
-        for (auto list : lists) {
-            while (list != NULL) {
-                allValues.push_back(list->val);
-                list = list->next;
+    //     for (auto list : lists) {
+    //         while (list != NULL) {
+    //             allValues.push_back(list->val);
+    //             list = list->next;
+    //         }
+    //     }
+
+    //     // Sort
+    //     sort(allValues.begin(), allValues.end());
+
+    //     // Create a dummy head for the final result list
+    //     ListNode* dummy = new ListNode(0);
+    //     ListNode* curr = dummy;
+
+    //     // Create new linked list nodes from sorted values
+    //     for (int val : allValues) {
+    //         curr->next = new ListNode(val);// Note to make Node of the value
+    //         curr = curr->next;
+    //     }
+        
+    //     return dummy->next;
+    // }
+
+//--------------------------------Optimal Approach--TC->O(NlogK)----------------------------
+    ListNode* mergeKLists(std::vector<ListNode*>& lists) {
+        std::priority_queue<ListNode*, std::vector<ListNode*>, Compare> pq;
+
+        for(auto list : lists){
+            if(list != NULL){
+                pq.push(list); // Here are only the first pointers.
             }
         }
 
-        // Sort
-        sort(allValues.begin(), allValues.end());
-
-        // Create a dummy head for the final result list
         ListNode* dummy = new ListNode(0);
-        ListNode* curr = dummy;
+        ListNode* tail = dummy;
 
-        // Create new linked list nodes from sorted values
-        for (int val : allValues) {
-            curr->next = new ListNode(val);// Note to make Node of the value
-            curr = curr->next;
+        // While the heap is not empty
+        while (!pq.empty()) {
+            ListNode* smallest = pq.top();
+            pq.pop();
+
+            tail->next = smallest;
+            tail = tail->next;
+
+            // If there's a next node, push it into the heap
+            if (smallest->next != NULL)
+                pq.push(smallest->next);
         }
-        
+
         return dummy->next;
     }
 
