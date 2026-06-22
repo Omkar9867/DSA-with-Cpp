@@ -35,7 +35,7 @@ public:
             for (int i = 0; i < groupSize; ++i) {
 
                 // If the current required card is missing or doesn't have enough frequency
-                if (freq[start + i] < count) return false;
+                if (freq[start + i] < count) return false; //! Since consecutive, note if count of start should be equevallent to the forwards nums. No gaps.
 
                 // Decrease the frequency for current card
                 freq[start + i] -= count;
