@@ -29,15 +29,76 @@ private:
 public:
 //*-----------------------------Memoization-----------------------------
 //---------------------------TC->O(n*m)-SC->O(n*m)-----------------------
+    // int findContentChildren(std::vector<int>& g, std::vector<int>& s) {
+    //     std::sort(g.begin(), g.end());
+    //     std::sort(s.begin(), s.end());
+
+    //     // Initialize DP table with -1
+    //     std::vector<std::vector<int>> memo(g.size(), std::vector<int>(s.size(), -1));
+
+    //     // Start recursion from index 0 for both arrays
+    //     return helper(0, 0, g, s, memo);
+    // }
+
+    // void printResult(int num){
+    //     std::cout << num << ": Result" << std::endl;
+    // }
+
+//*-----------------------------Tabulation-----------------------------
+//---------------------------TC->O(n*m)-SC->O(n*m)-----------------------
+    // int findContentChildren(std::vector<int>& g, std::vector<int>& s) {
+    //     int n = g.size();
+    //     int m = s.size();
+
+    //     // Sort both arrays to prepare for DP
+    //     std::sort(g.begin(), g.end());
+    //     std::sort(s.begin(), s.end());
+
+    //     // Create a 2D DP table
+    //     std::vector<std::vector<int>> dp(n + 1, std::vector<int>(m + 1, 0));
+
+    //     // Fill DP table from bottom up
+    //     for (int i = n - 1; i >= 0; --i) {
+    //         for (int j = m - 1; j >= 0; --j) {
+    //             // Skip current s
+    //             int skip = dp[i][j + 1];
+
+    //             // Take current s if it satisfies g's greed
+    //             int take = 0;
+    //             if (s[j] >= g[i]) {
+    //                 take = 1 + dp[i + 1][j + 1];
+    //             }
+
+    //             // Take the best of both choices
+    //             dp[i][j] = std::max(skip, take);
+    //         }
+    //     }
+
+    //     return dp[0][0];
+    // }
+
+
+//*-----------------------------Optimal Approach-----------------------------
+//---------------------------TC->O(n*logn + m*logm)--SC->O(1)-----------------------
     int findContentChildren(std::vector<int>& g, std::vector<int>& s) {
         std::sort(g.begin(), g.end());
         std::sort(s.begin(), s.end());
+        
+        int gIdx = 0; 
+        int sIdx = 0;  
 
-        // Initialize DP table with -1
-        std::vector<std::vector<int>> memo(g.size(), std::vector<int>(s.size(), -1));
+        // Try to assign cookies until any one list is fully processed
+        while (gIdx < g.size() && sIdx < s.size()) {
+            // If the cookie satisfies the student's greed
+            if (s[sIdx] >= g[gIdx]) {
+                gIdx++; 
+            }
+            // Move to next cookie in both cases
+            sIdx++; 
+        }
 
-        // Start recursion from index 0 for both arrays
-        return helper(0, 0, g, s, memo);
+        // Number of students satisfied is equal to gIdx
+        return gIdx;
     }
 
     void printResult(int num){
