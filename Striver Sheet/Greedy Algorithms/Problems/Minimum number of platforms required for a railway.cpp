@@ -5,42 +5,62 @@ private:
 
 public:
 //-----------------------Brute Force Approach----TC->O(N^2)-SC->O(1)-----------------------
-    int countPlatforms(std::vector<int>& arr, std::vector<int>& dep) {
-        int n = sizeof(arr) / sizeof(arr[0]);
-        int ans = 1;
-
-        for (int i = 0; i < n; i++) {
-
-            int count = 1;
-
-            // Check overlap with every other train
-            for (int j = i + 1; j < n; j++) {
-
-                // Check if there is overlap between train i and j
-                if ((arr[i] >= arr[j] && arr[i] <= dep[j]) ||
-                    (arr[j] >= arr[i] && arr[j] <= dep[i])) {
-                    count++;
-                }
-            }
-
-            ans = std::max(ans, count);
-        }
-
-        return ans;
-    }
-
-
-//-----------------------Better Approach----TC->O(N^2)-SC->O(N)-----------------------
     // int countPlatforms(std::vector<int>& arr, std::vector<int>& dep) {
+    //     int n = sizeof(arr) / sizeof(arr[0]);
+    //     int ans = 1;
 
+    //     for (int i = 0; i < n; i++) {
+
+    //         int count = 1;
+
+    //         // Check overlap with every other train
+    //         for (int j = i + 1; j < n; j++) {
+
+    //             // Check if there is overlap between train i and j
+    //             if ((arr[i] >= arr[j] && arr[i] <= dep[j]) ||
+    //                 (arr[j] >= arr[i] && arr[j] <= dep[i])) {
+    //                 count++;
+    //             }
+    //         }
+
+    //         ans = std::max(ans, count);
+    //     }
+
+    //     return ans;
     // }
 
 
 //*-----------------------------Optimal Approach-----------------------------
-//---------------------------TC->O(N)--SC->O(1)-----------------------
-    // int countPlatforms(std::vector<int>& arr, std::vector<int>& dep) {
+//---------------------------TC->O(NlogN)--SC->O(1)-----------------------
+    int countPlatforms(std::vector<int>& arr, std::vector<int>& dep) {
+        int n = arr.size();
 
-    // }
+        std::sort(arr.begin(), arr.end());
+        std::sort(dep.begin(), dep.end());
+
+        // Initialize pointers and counters
+        int platforms = 1;
+        int result = 1;
+        int i = 1, j = 0;
+
+        // Traverse both arrays
+        while (i < n && j < n) {
+            // If next train arrives before current one departs
+            if (arr[i] <= dep[j]) {
+                // One more platform needed
+                platforms++;
+                i++;
+            } else {
+                // One train departs, platform freed
+                platforms--;
+                j++;
+            }
+
+            result = std::max(result, platforms);
+        }
+
+        return result;
+    }
 
     void printResult(int num){
         std::cout << num << ": Result" << std::endl;
