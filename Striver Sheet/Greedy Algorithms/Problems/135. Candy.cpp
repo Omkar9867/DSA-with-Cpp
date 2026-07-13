@@ -38,7 +38,7 @@ public:
     }
 
 
-//-----------------------Better Approach----TC->O(N^2)-SC->O(N)-----------------------
+//-----------------------Better Approach----TC->O(N)-SC->O(N)-----------------------
     int candy(std::vector<int>& ratings) {
         int n = ratings.size();
         std::vector<int> candies(n, 1);
@@ -65,7 +65,41 @@ public:
 //*-----------------------------Optimal Approach-----------------------------
 //---------------------------TC->O(N)--SC->O(1)-----------------------
     int candy(std::vector<int>& ratings) {
+        int n = ratings.size();
 
+        // 1 candy to each child intially
+        int candies = n;
+        int i = 1; // iterate from 2nd
+
+        while (i < n) {
+            // Skip equal ratings
+            if (ratings[i] == ratings[i - 1]) {
+                i++;
+                continue;
+            }
+            int peak = 0;
+
+            // Traverse increasing ratings
+            while (i < n && ratings[i] > ratings[i - 1]) {
+                peak++;
+                candies += peak;
+                i++;
+            }
+
+            // Initialize decreasing slope counter
+            int valley = 0;
+
+            // Traverse decreasing ratings
+            while (i < n && ratings[i] < ratings[i - 1]) {
+                valley++;
+                candies += valley;
+                i++;
+            }
+
+            // Remove extra candy given to peak (overlap of increasing and decreasing)
+            candies -= std::min(peak, valley);
+        }
+        return candies;
     }
 
     void printResult(int num){
