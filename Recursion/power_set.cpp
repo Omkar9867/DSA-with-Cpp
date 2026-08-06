@@ -43,7 +43,7 @@ public:
         current.push_back(s[index]);
         helper(s, index + 1, current, result);
 
-        // Backtrack: remove last character before returning to previous call
+        // Backtrack: remove last character before returning to previous call (if the current is `pass by ref`)
         current.pop_back();
     }
 
