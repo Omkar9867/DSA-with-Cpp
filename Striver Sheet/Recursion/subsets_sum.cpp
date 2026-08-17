@@ -52,7 +52,6 @@ public:
     }
 };
 
-// Driver code
 int main() {
     Solution sol;
     std::vector<int> arr = {5, 2, 1};
