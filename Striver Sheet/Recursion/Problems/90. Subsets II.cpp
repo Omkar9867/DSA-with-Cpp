@@ -21,7 +21,7 @@ private:
         findSubsets(ind + 1, nums, ds, result);
     }
 public:
-    //------------------------------Brute Force Approach--TC->O(2^n*n)--SC->O(2^n)-----------------------------
+    //------------------------------Brute Force Approach--TC->O(2^n*n^2)--SC->O(2^n)-----------------------------
     std::vector<std::vector<int>> subsetSums(std::vector<int>& nums) {
         std::set<std::vector<int>> result;
         std::vector<int> ds;
@@ -35,9 +35,37 @@ public:
         return ans;
     }
 
-    //------------------------------Recursive Approach--TC->O(2^n)--SC->O(2^n)-----------------------------
+private:
+    void backtrack(int start, std::vector<int>& nums, std::vector<int>& current, std::vector<std::vector<int>>& result) {
+        result.push_back(current);
+
+        for (int i = start; i < nums.size(); i++) {
+            // Skip duplicates: if current number is same as previous and not at the start index
+            if (i > start && nums[i] == nums[i - 1]) continue;
+
+            // Include nums[i] in current subset
+            current.push_back(nums[i]);
+
+            // Recurse for next index
+            backtrack(i + 1, nums, current, result);
+
+            // Backtrack: remove last added element
+            current.pop_back();
+        }
+    }
+
+public:
+    //------------------------------Optimal Approach--TC->O(2^n)--SC->O(2^n)-----------------------------
     std::vector<std::vector<int>> subsetSums(std::vector<int>& nums) {
-        
+        std::sort(nums.begin(), nums.end());
+
+        std::vector<std::vector<int>> result;
+        std::vector<int> current;
+
+        // Start backtracking from index 0
+        backtrack(0, nums, current, result);
+
+        return result;
     }
 
     void printResult(std::vector<std::vector<int>> result){
