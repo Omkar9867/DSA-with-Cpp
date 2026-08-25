@@ -27,6 +27,7 @@ private:
         }
     } 
 public:
+//-----------------------------Approach--TC->O(2^9 * k)-------------------------------
     std::vector<std::vector<int>> combinationSum3(int k, int n) {
         std::vector<std::vector<int>> ans;
         std::vector<int> nums;
