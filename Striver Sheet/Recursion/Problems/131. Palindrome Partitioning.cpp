@@ -27,6 +27,7 @@ private:
     }
 
 public:
+//---------------------------------Approach--TC->O(2^n*n)--SC->O(2^N*N)+O(N)-------------------------------------exta space to store possible results and auxiliary stack space.
     std::vector<std::vector<std::string>> partition(std::string s) {
         std::vector<std::vector<std::string>> result;
         std::vector<std::string> path;
