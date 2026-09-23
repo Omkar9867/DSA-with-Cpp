@@ -32,6 +32,23 @@ public:
 
         return triangle;
     }
+
+    //------------------------------Optimal Solution---TC->O(N^2)--SC->O(N)---------------------------
+    std::vector<std::vector<int>> generate(int numRows) {
+        std::vector<std::vector<int>> triangle;
+
+        for (int row = 0; row < numRows; row++) {
+            std::vector<int> current(row+1, 1);
+
+            for (int col = 1; col < row; col++) {
+                current[col] = triangle[row-1][col-1] + triangle[row-1][col];
+            }
+
+            triangle.push_back(current);
+        }
+
+        return triangle;
+    }
 };
 
 // Prints a triangle in list form.
