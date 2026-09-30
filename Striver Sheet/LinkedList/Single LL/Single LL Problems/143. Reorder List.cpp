@@ -87,7 +87,7 @@ private:
             second = secondNext;
         }
     }
-
+public:
     // ---------------------------------------------- Optimal Approach TC->O(N) -- SC->O(1)------------------------------
     void reorderList(Node *head) {
         if (head == nullptr || head->next == nullptr) {
