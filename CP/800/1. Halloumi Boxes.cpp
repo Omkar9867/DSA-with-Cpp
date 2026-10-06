@@ -24,7 +24,7 @@ int main(){
 }
 
 
-// A. Halloumi Boxes --- time limit per test1 second --- memory limit per test256 megabytes
+// A. Halloumi Boxes --- time limit per test: 1 second --- memory limit per test256 megabytes
 
 // Theofanis is busy after his last contest, as now, he has to deliver many halloumis all over the world. 
 // He stored them inside n boxes and each of which has some number ai written on it.
