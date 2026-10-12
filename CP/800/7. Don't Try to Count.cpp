@@ -2,6 +2,7 @@
 
 class Solution{
 private:
+//----------------------------TC->O(n*m)---------------------
     bool check(std::string s, std::string x){
         if (x.size() < s.size()){
             return false;
@@ -16,7 +17,6 @@ private:
         return false;
     }
 public:
-//-----------------------------TC->O(1)--SC->O(1)----------------------------
     int count(std::string s, std::string x){
         std::string x0 = x; //  0 operations
         std::string x1 = x0 + x0; // 1 operation
@@ -40,7 +40,8 @@ public:
             ans = 5;
         return ans;
     }
-
+// TC-> O(2^5*m*n) == O(32*n*m)
+// SC-> O(2^5*n) == O(32*n)
 };
 
 
