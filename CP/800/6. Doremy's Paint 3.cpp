@@ -12,6 +12,7 @@ public:
         if(freq_map.size() >= 3){
             return "NO";
         }else{
+            // IF one freq even then the value of both will be same so the case is handled already
             long long freq_1 = freq_map.begin()->second;
             long long freq_2 = freq_map.rbegin()->second;
             
