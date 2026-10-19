@@ -23,6 +23,29 @@ int main(){
     return 0;
 }
 
+//-------------------------Submit--------------------------
+int main(){
+    int t; // Variable to store the number of test cases
+    std::cin >> t;
+    while(t--){
+        long long n, k;
+        std::cin >> n >> k; // Read the values of n and k
+        std::vector<long long> nums(n);
+        for (int i = 0; i < n; i++){
+            std::cin >> nums[i];
+        }
+
+        std::vector<long long> copy_n = nums;
+        std::sort(copy_n.begin(), copy_n.end());
+        if(copy_n == nums || k > 1){ // If either sorted or k more then 1
+            std::cout << "YES" << std::endl;
+        }else{
+            std::cout << "NO" << std::endl;
+        }
+    }
+    return 0;
+}
+
 
 // A. Halloumi Boxes --- time limit per test: 1 second --- memory limit per test256 megabytes
 
