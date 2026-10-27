@@ -7,7 +7,7 @@ int main(){
         long long n, k, x;
         std::cin >> n >> k >> x;
         
-        //-------------------------------TC->O(1)--SC->O(1)----------------------
+        //-------------------------------TC->O(N)--SC->O(1)----------------------
         if (x != 1){ // We can print all the 1's
             std::cout << "YES" << std::endl;
             std::cout << n << std::endl;
