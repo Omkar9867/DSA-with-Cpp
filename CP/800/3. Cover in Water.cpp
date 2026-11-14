@@ -26,6 +26,30 @@ int main(){
     return 0;
 }
 
+int main(){
+    int t; // Variable to store the number of test cases
+    std::cin >> t;
+    while(t--){
+        int n;
+        std::cin >> n;
+        std::string s;
+        std::cin >> s; // Read the string representing the row of cells
+        
+        int maxFill = 0;
+        for(int i = 0; i < s.size(); i++){
+            if(s[i] == '.' && i+1 < n && s[i+1] == '.' && i+2 < n && s[i+2] == '.'){
+                maxFill = 2;
+                break;
+            }
+            if(s[i] == '.'){
+                maxFill++;
+            }
+        }
+        std::cout << maxFill << std::endl;
+    }
+    return 0;
+}
+
 /*
     A. Cover in Water
 
