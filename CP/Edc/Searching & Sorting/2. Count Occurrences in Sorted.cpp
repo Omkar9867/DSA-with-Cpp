@@ -8,8 +8,8 @@ public:
     {
         auto lb = lower_bound(arr.begin(), arr.end(), target);
         auto ub = upper_bound(arr.begin(), arr.end(), target);
-        
-        return ub - lb;
+
+        return ub - lb; // Note these are some mem ref , how far ub mem addr is from lb mem addr
     }
 };
 
