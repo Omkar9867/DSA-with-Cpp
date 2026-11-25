@@ -7,6 +7,7 @@ private:
         return result;
     }
 public:
+//----------------------------------TC->(nlog(ss))----------------------------searchspace
     int minEatingSpeed(std::vector<int>& piles, int h) {
         int result = 1;
         int l = 1;
